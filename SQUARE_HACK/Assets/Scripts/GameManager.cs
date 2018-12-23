@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour {
 		
 		
 		if(Mathf.Abs(Camera.transform.position.y - maxPlayerPosY) > 0.3f){
-			Vector3 wantPos = new Vector3(0,maxPlayerPosY,-10);
+			Vector3 wantPos = new Vector3(0,maxPlayerPosY,Camera.transform.position.z);
 			Camera.transform.position = Vector3.Lerp(Camera.transform.position, wantPos + CameraOffset, 5* Time.deltaTime);
 		}
 		
