@@ -103,10 +103,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if(isDamage)
-		{
-
-		}
+		
 	}
 
 	void Jump(){
@@ -181,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		// if(!playerHead.IsHitHead)
 		// {
-		if(other.gameObject.tag == "Damage")
+		if(other.gameObject.tag == "Damage" && !isDamage)
 		{
 			StartCoroutine(Blink());
 			speed -= decreaseSpeedDamage;
@@ -245,11 +242,13 @@ public class PlayerController : MonoBehaviour {
 
 	 IEnumerator Blink() {
 		 float start = GameManager.instance.GetCurrentFrameTime();
+		 isDamage = true;
         while ( true ) {
 			var now = GameManager.instance.GetCurrentFrameTime();
 			if(now - start >= 1)
 			{
             playerRender.enabled = true;
+			isDamage = false;
 			yield break;				
 			}
             playerRender.enabled = !playerRender.enabled;
