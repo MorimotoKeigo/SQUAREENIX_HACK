@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private PLAYER_STATE playerState = PLAYER_STATE.RIGHT;
 	public float angle = 30;
-	public float speed = 10;
+	public float firstAngle = 30;
 	public float secondAngle = 60;
+	public float speed = 10;
 	// Use this for initialization
 	private int jumpCnt = 0;
 	private float time= 0;
@@ -68,11 +69,9 @@ public class PlayerController : MonoBehaviour {
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
 					playerState = PLAYER_STATE.LEFT;
-					jumpCnt = 0;
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
-					jumpCnt = 0;
 					break;
 				case PLAYER_STATE.Air:
 					break;
@@ -85,7 +84,7 @@ public class PlayerController : MonoBehaviour {
 			case PLAYER_STATE.RIGHT:
 				if(jumpCnt == 0)
 				{
-					SetPlayerSpeed(-1f,1f,30);
+					SetPlayerSpeed(-1f,1f,firstAngle);
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
@@ -95,7 +94,7 @@ public class PlayerController : MonoBehaviour {
 			case PLAYER_STATE.LEFT:
 				if(jumpCnt == 0)
 				{
-					SetPlayerSpeed(1f,1f,30);
+					SetPlayerSpeed(1f,1f,firstAngle);
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
@@ -138,6 +137,25 @@ public class PlayerController : MonoBehaviour {
 	{
 		// if(!playerHead.IsHitHead)
 		// {
+		if(other.gameObject.tag == "Damage")
+		{
+			velocityX = 0;
+			velocityY = 0;
+			switch(playerState){
+				case PLAYER_STATE.RIGHT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.LEFT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.Air:
+					break;
+			}
+		}else{
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
@@ -152,7 +170,8 @@ public class PlayerController : MonoBehaviour {
 				case PLAYER_STATE.Air:
 					break;
 			}
-		// }
+		
+		}
 	}
 
 	public Vector3 GetPlayerPosition(){
