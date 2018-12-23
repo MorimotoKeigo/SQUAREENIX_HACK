@@ -9,6 +9,11 @@ public class PlayerController : MonoBehaviour {
 		LEFT,
 		Air
 	}
+	public enum JUST_RESULT{
+		BAD,
+		GOOD,
+		PERFECT
+	}
 	[SerializeField]
 	PlayerBody playerBody;
 	[SerializeField]
@@ -21,10 +26,22 @@ public class PlayerController : MonoBehaviour {
 	public float firstAngle = 30;
 	public float secondAngle = 60;
 	public float speed = 10;
+	public JUST_RESULT justResult;
 	// Use this for initialization
 	private int jumpCnt = 0;
 	private float time= 0;
 	private Rigidbody rigidBody;
+	private float collisionFrame = 0;
+
+
+	public float CollisionFrame
+	{
+		get{return collisionFrame;}
+	}
+
+	const float badFrame = 1.0f;
+	const float goodFrame = 0.5f;
+	const float perfectFrame = 0.25f;
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody>();
@@ -35,13 +52,16 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)){
+			float nowTime = GameManager.instance.GetCurrentFrameTime();
+			if(jumpCnt == 0)
+				JustResult();
 			Jump();
+			
 		}
 		// transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
 		rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
 		// Debug.Log(rigidBody.velocity);
 		
-
 		if(jumpCnt == 2)
 		{
 			time += Time.deltaTime;
@@ -111,7 +131,28 @@ public class PlayerController : MonoBehaviour {
 
 		}
 	}
-	
+	public void JustResult()
+	{	
+		var nowTime = GameManager.instance.GetCurrentFrameTime();
+		if(nowTime - collisionFrame >= badFrame)
+		{
+			Debug.Log("bad");
+			justResult = JUST_RESULT.BAD;
+		}
+		else if(nowTime - collisionFrame <= perfectFrame)
+		{
+			Debug.Log("perfect");
+			justResult = JUST_RESULT.PERFECT;			
+		}
+		else if(nowTime - collisionFrame <= goodFrame)
+		{
+			justResult = JUST_RESULT.GOOD;
+		}
+	}
+
+	public JUST_RESULT GetJustResult(){
+		return justResult;
+	}
 	// void OnTriggerEnter(Collider other)
 	// {
 	// 	// if(other.gameObject.tag == "wall"){
@@ -141,6 +182,7 @@ public class PlayerController : MonoBehaviour {
 		// {
 		if(other.gameObject.tag == "Damage")
 		{
+			collisionFrame = GameManager.instance.GetCurrentFrameTime();
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
@@ -158,6 +200,8 @@ public class PlayerController : MonoBehaviour {
 					break;
 			}
 		}else{
+			rigidBody.useGravity = true;
+			collisionFrame = GameManager.instance.GetCurrentFrameTime();
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
@@ -174,6 +218,11 @@ public class PlayerController : MonoBehaviour {
 			}
 		
 		}
+	}
+
+	private void OnCollisionExit(Collision other) {
+		rigidBody.useGravity = false;
+		
 	}
 
 	public Vector3 GetPlayerPosition(){
