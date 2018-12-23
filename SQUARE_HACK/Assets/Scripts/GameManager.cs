@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	public Vector3 LavaSpeed3;
 
-	
+	[SerializeField]
+	public Vector3 CameraOffset;
 	
 	//カメラ類
 	[SerializeField]
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
+	bool SECountFrag = false;
 
 	// Use this for initialization
 	void Start () {
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour {
 		CurrentFrame += Time.deltaTime;
 	}
 	void GameOver(){
-		Debug.Log("testGameOver");
+		//Debug.Log("testGameOver");
 		Invoke("SceneChange",3.0f);
 	}
 
@@ -101,14 +103,20 @@ public class GameManager : MonoBehaviour {
 	void CheckHitLava(){
 		float distance = Player.transform.position.y - Lava.transform.position.y;
 		
-		if(distance <= 5){
-			SoundManager.instance.PlaySoundSE(LavaSE);
+
+
+		if(SECountFrag == false && distance <= 5f){
+			SoundManager.instance.PlaySoundSE(LavaSE,1.0f);
+			SECountFrag = true;
+		}
+		
+		if(distance >= 10f){
+			SECountFrag = false;
 		}
 		
 		
-		
 		if(distance <= 0){
-			Debug.Log("testCheckHitLava");
+			//Debug.Log("testCheckHitLava");
 			GameOver();
 		}
 	}
@@ -123,32 +131,18 @@ public class GameManager : MonoBehaviour {
 		
 		//float offset = Player.transform.position.y - Camera.transform.position.y;
 		
-		/*
+		
 		if(Player.transform.position.y >  maxPlayerPosY){
+			Debug.Log(maxPlayerPosY);
 			maxPlayerPosY = Player.transform.position.y;
 		}
-		*/
-
-
-		// && Mathf.Abs(transform.position.y - maxPlayerPosY) > 0.5f
 		
-		/* 
-		if(Mathf.Abs(transform.position.y - maxPlayerPosY) > 0.5f){
-			Vector3 wantPos = new Vector3(0,maxPlayerPosY,0);
-			Camera.transform.position = Vector3.Lerp(transform.position, wantPos, 5* Time.deltaTime);
+		
+		if(Mathf.Abs(Camera.transform.position.y - maxPlayerPosY) > 0.3f){
+			Vector3 wantPos = new Vector3(0,maxPlayerPosY,-10);
+			Camera.transform.position = Vector3.Lerp(Camera.transform.position, wantPos + CameraOffset, 5* Time.deltaTime);
 		}
-		*/
-		//offsettmp += offset;
-
-		/* 
-		if(offsettmp>3f){
-			
-			Camera.transform.position += new Vector3(0.0f, offsettmp, 0.0f);
-			offsettmp = 0;
-			//cameracount = 0; 
-		}
-		*/
-		//Camera.transform.position += new Vector3(0.0f, offset, 0.0f);
+		
 			
 
 
