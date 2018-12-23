@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour {
 
 
 		if(SECountFrag == false && distance <= 5f){
-			SoundManager.instance.PlaySoundSE(LavaSE,1.0f);
+			SoundManager.instance.PlaySoundSE(LavaSE);
 			SECountFrag = true;
 		}
 		
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour {
 		
 		
 		if(Player.transform.position.y >  maxPlayerPosY){
-			Debug.Log(maxPlayerPosY);
+			//Debug.Log(maxPlayerPosY);
 			maxPlayerPosY = Player.transform.position.y;
 		}
 		
