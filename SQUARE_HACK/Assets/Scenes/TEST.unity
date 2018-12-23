@@ -356,30 +356,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1951812144892908, guid: 33decd849c7af4cc88e0e56707a997cb, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114560089958772056, guid: 33decd849c7af4cc88e0e56707a997cb,
-        type: 2}
-      propertyPath: secondAngle
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 136502937226748720, guid: 33decd849c7af4cc88e0e56707a997cb,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54188677675401648, guid: 33decd849c7af4cc88e0e56707a997cb,
-        type: 2}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114560089958772056, guid: 33decd849c7af4cc88e0e56707a997cb,
-        type: 2}
-      propertyPath: riseSpeed
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33decd849c7af4cc88e0e56707a997cb, type: 2}
   m_IsPrefabParent: 0

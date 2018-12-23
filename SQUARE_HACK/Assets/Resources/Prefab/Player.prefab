@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4486268896064010
 Transform:
   m_ObjectHideFlags: 1
@@ -160,7 +160,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &114314118972915396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,8 +189,11 @@ MonoBehaviour:
   velocityY: 0
   playerState: 1
   angle: 20
+  firstAngle: 30
+  secondAngle: 70
   speed: 20
-  secondAngle: 40
+  riseSpeed: 0.3
+  justResult: 0
 --- !u!114 &114754986064280012
 MonoBehaviour:
   m_ObjectHideFlags: 1
