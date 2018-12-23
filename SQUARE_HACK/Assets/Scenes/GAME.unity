@@ -923,7 +923,7 @@ MonoBehaviour:
   Player: {fileID: 1434273593}
   FadeUnit: {fileID: 1063785492}
   BGM: {fileID: 8300000, guid: f8a561312abdd42e5a8414a6b68bcee2, type: 3}
-  LavaSE: {fileID: 8300000, guid: c64e8c1b5cd714b8d8899158f3b274c4, type: 3}
+  LavaSE: {fileID: 8300000, guid: 96e1757b021b34e2792a655b716b8e51, type: 3}
   LavaSpeed1: {x: 0, y: 0.05, z: 0}
   LavaSpeed2: {x: 0, y: 0, z: 0}
   LavaSpeed3: {x: 0, y: 0, z: 0}
