@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	public Vector3 LavaSpeed3;
 	
+	//カメラ類
+	float offsettmp = 0;
+	float cameracount = 0;
 
 	void Awake(){
 		if (instance == null) {
@@ -112,9 +115,22 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void MoveCamera(){
-
 		
 		float offset = Player.transform.position.y - Camera.transform.position.y;
-		Camera.transform.position += new Vector3(0.0f, offset, 0.0f); 
+		
+		//offsettmp += offset;
+
+		/* 
+		if(offsettmp>3f){
+			
+			Camera.transform.position += new Vector3(0.0f, offsettmp, 0.0f);
+			offsettmp = 0;
+			//cameracount = 0; 
+		}
+		*/
+		Camera.transform.position += new Vector3(0.0f, offset, 0.0f);
+			
+
+
 	}
 }
