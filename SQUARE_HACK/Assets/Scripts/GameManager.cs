@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private AudioClip LavaSE;
 
+	
+	GameObject Camera;
 
 
 	void Awake(){
@@ -48,12 +50,19 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		CalcCurrentFrame();
-		Debug.Log(GetCurrentFrameTime());
+		
+		
 		CheckHitLava();
 		MoveLavaPosition();
+		
+		MoveCamera();
 	}
 
 	void InitGame(){
+
+
+		Camera = GameObject.Find("Main Camera");
+
 		CurrentFrame = 0;
 		FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(1);
 		//LavaPositon = new Vector3(0,0,0);
@@ -75,7 +84,7 @@ public class GameManager : MonoBehaviour {
 		//FadeSystem..GetComponent<FadeSystem>.Fadein();
 		FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(2);
 		SoundManager.instance.StopSingleSound();
-		//SceneManager.LoadScene("RESULT");
+		SceneManager.LoadScene("RESULT");
 	}
 	float GetCurrentFrameTime(){
 		return CurrentFrame;
@@ -90,6 +99,11 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void MoveLavaPosition(){
-		Lava.transform.position += new Vector3(0.0f,0.3f,0.0f);
+		Lava.transform.position += new Vector3(0.0f,0.01f,0.0f);
+	}
+
+	void MoveCamera(){
+		float offset = Player.transform.position.y - Camera.transform.position.y;
+		Camera.transform.position += new Vector3(0.0f, offset, 0.0f); 
 	}
 }

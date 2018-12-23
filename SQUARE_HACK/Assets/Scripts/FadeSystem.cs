@@ -22,6 +22,7 @@ public class FadeSystem : MonoBehaviour
     public StagingType stagingType; //演出の種類
     //-------------------------------------------------------
 
+    public GameObject sprite;
     /// <summary>
     /// ●演出の種類
     /// </summary>
@@ -40,9 +41,22 @@ public class FadeSystem : MonoBehaviour
     /// <summary>
     /// ●初期化する関数.
     /// </summary>
+
+    public static FadeSystem instance = null;
+    
+
     void Start ()
     {
+        if(SoundManager.instance == null){
+            instance = this;
+        }else if(SoundManager.instance != this){
+            Destroy(this);
+        }
+
+        DontDestroyOnLoad(gameObject);
+        
         StandingTypeChange ();  //演出の種類を切り替える関数の呼び出し
+        
     }
 
 
@@ -106,6 +120,8 @@ public class FadeSystem : MonoBehaviour
         {
             /*フェード(2Dオブジェクト)を発見し,取得する.*/
             spriteObject = GameObject.Find ("Fade");
+        }else{
+            spriteObject = sprite;
         }
 
         //フェード(2Dオブジェクト)の色の読み込み--------------------
@@ -134,8 +150,9 @@ public class FadeSystem : MonoBehaviour
         {
             /*フェード(2Dオブジェクト)を発見し,取得する.*/
             spriteObject = GameObject.Find ("Fade");
-        }
-
+        }else{
+            spriteObject = sprite;
+        }   
         //フェード(2Dオブジェクト)の色の読み込み--------------------
         spriteObject.GetComponent<SpriteRenderer> ().color = new Color (0, 0, 0, alpha);
         //-------------------------------------------------------
