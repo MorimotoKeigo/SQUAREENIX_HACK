@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerHead
   - Damage
+  - Head
   layers:
   - Default
   - TransparentFX
