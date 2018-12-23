@@ -23,9 +23,7 @@ public class GameManager : MonoBehaviour {
 	private AudioClip BGM;
 	
 	[SerializeField]
-	private AudioClip LavaSE;
-
-	
+	private AudioClip LavaSE;	
 	GameObject Camera;
 
 	[SerializeField]
@@ -36,11 +34,12 @@ public class GameManager : MonoBehaviour {
 	
 	[SerializeField]
 	public Vector3 LavaSpeed3;
+
+	
 	
 	//カメラ類
-	float offsettmp = 0;
-	float cameracount = 0;
-
+	[SerializeField]
+	float maxPlayerPosY = 0;
 	void Awake(){
 		if (instance == null) {
 			instance = this;
@@ -72,7 +71,7 @@ public class GameManager : MonoBehaviour {
 
 	void InitGame(){
 
-
+		
 		Camera = GameObject.Find("Main Camera");
 
 		CurrentFrame = 0;
@@ -87,8 +86,6 @@ public class GameManager : MonoBehaviour {
 	void GameOver(){
 		Debug.Log("testGameOver");
 		Invoke("SceneChange",3.0f);
-
-		
 	}
 
 	void SceneChange(){
@@ -97,12 +94,19 @@ public class GameManager : MonoBehaviour {
 		SoundManager.instance.StopSingleSound();
 		SceneManager.LoadScene("RESULT");
 	}
-	float GetCurrentFrameTime(){
+	public float GetCurrentFrameTime(){
 		return CurrentFrame;
 	}
 
 	void CheckHitLava(){
 		float distance = Player.transform.position.y - Lava.transform.position.y;
+		
+		if(distance <= 5){
+			SoundManager.instance.PlaySoundSE(LavaSE);
+		}
+		
+		
+		
 		if(distance <= 0){
 			Debug.Log("testCheckHitLava");
 			GameOver();
@@ -116,8 +120,24 @@ public class GameManager : MonoBehaviour {
 
 	void MoveCamera(){
 		
-		float offset = Player.transform.position.y - Camera.transform.position.y;
 		
+		//float offset = Player.transform.position.y - Camera.transform.position.y;
+		
+		/*
+		if(Player.transform.position.y >  maxPlayerPosY){
+			maxPlayerPosY = Player.transform.position.y;
+		}
+		*/
+
+
+		// && Mathf.Abs(transform.position.y - maxPlayerPosY) > 0.5f
+		
+		/* 
+		if(Mathf.Abs(transform.position.y - maxPlayerPosY) > 0.5f){
+			Vector3 wantPos = new Vector3(0,maxPlayerPosY,0);
+			Camera.transform.position = Vector3.Lerp(transform.position, wantPos, 5* Time.deltaTime);
+		}
+		*/
 		//offsettmp += offset;
 
 		/* 
@@ -128,7 +148,7 @@ public class GameManager : MonoBehaviour {
 			//cameracount = 0; 
 		}
 		*/
-		Camera.transform.position += new Vector3(0.0f, offset, 0.0f);
+		//Camera.transform.position += new Vector3(0.0f, offset, 0.0f);
 			
 
 
