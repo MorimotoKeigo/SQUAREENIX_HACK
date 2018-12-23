@@ -16,6 +16,17 @@ public class GameManager : MonoBehaviour {
 	//public Vector3 PlayerPosition; 
 	public GameObject Player;
 
+	public GameObject FadeUnit;
+
+
+	[SerializeField]
+	private AudioClip BGM;
+	
+	[SerializeField]
+	private AudioClip LavaSE;
+
+
+
 	void Awake(){
 		if (instance == null) {
 			instance = this;
@@ -31,7 +42,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		SoundManager.instance.PlaySingleSound(BGM);
 	}
 	
 	// Update is called once per frame
@@ -44,6 +55,7 @@ public class GameManager : MonoBehaviour {
 
 	void InitGame(){
 		CurrentFrame = 0;
+		FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(1);
 		//LavaPositon = new Vector3(0,0,0);
 		//PlayerPosition = new Vector3(0,0,0);
 	}
@@ -54,10 +66,16 @@ public class GameManager : MonoBehaviour {
 	void GameOver(){
 		Debug.Log("testGameOver");
 		Invoke("SceneChange",3.0f);
+
+		
 	}
 
 	void SceneChange(){
-		SceneManager.LoadScene("RESULT");
+		
+		//FadeSystem..GetComponent<FadeSystem>.Fadein();
+		FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(2);
+		SoundManager.instance.StopSingleSound();
+		//SceneManager.LoadScene("RESULT");
 	}
 	float GetCurrentFrameTime(){
 		return CurrentFrame;
