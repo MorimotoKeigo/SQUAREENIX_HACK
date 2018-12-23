@@ -9,7 +9,10 @@ public class PlayerController : MonoBehaviour {
 		LEFT,
 		Air
 	}
-
+	[SerializeField]
+	GameObject playerBody;
+	[SerializeField]
+	PlayerHead playerHead;
 	[SerializeField]
 	float velocityX,velocityY;
 	[SerializeField]
@@ -43,6 +46,13 @@ public class PlayerController : MonoBehaviour {
 		{
 			time = 0f;
 		}
+
+		if(playerHead.IsHitHead)
+		{
+			velocityY *= -1;
+			playerHead.IsHitHead = false;
+			Debug.Log("head");
+		}
 	}
 
 	void Jump(){
@@ -75,7 +85,6 @@ public class PlayerController : MonoBehaviour {
 
 		}
 	}
-	
 	
 	void OnTriggerEnter(Collider other)
 	{
