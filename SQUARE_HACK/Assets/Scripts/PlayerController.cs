@@ -10,15 +10,15 @@ public class PlayerController : MonoBehaviour {
 		Air
 	}
 
-
-
 	[SerializeField]
 	float velocityX,velocityY;
 	[SerializeField]
 	private PLAYER_STATE playerState;
 	private float angle = 30;
+	private float targetAngle = 60;
 	// Use this for initialization
 	private int jumpCnt = 0;
+	private float time= 0;
 	void Start () {
 		playerState = PLAYER_STATE.RIGHT;
 	}
@@ -30,6 +30,19 @@ public class PlayerController : MonoBehaviour {
 		}
 		transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
 
+		if(jumpCnt == 2)
+		{
+			time += Time.deltaTime;
+			if(time >= 0.01f)
+			{
+				if(targetAngle >= angle * Mathf.Rad2Deg)
+					angle += 10 * Mathf.Deg2Rad;
+				time = 0f;
+			}
+		}else
+		{
+			time = 0f;
+		}
 	}
 
 	void Jump(){
@@ -37,30 +50,20 @@ public class PlayerController : MonoBehaviour {
 			case PLAYER_STATE.RIGHT:
 				if(jumpCnt == 0)
 				{
-					velocityX = -1f;
-					velocityY = 1f;
-					angle = 30 * Mathf.Deg2Rad;
+					SetPlayerSpeed(-1f,1f,30);
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
-					velocityX = -1f;
-					velocityY = 1f;
-					angle = 60 * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
 			break;
 			case PLAYER_STATE.LEFT:
 				if(jumpCnt == 0)
 				{
-					velocityX = 1f;
-					velocityY = 1f;
-					angle = 30 * Mathf.Deg2Rad;
+					SetPlayerSpeed(1f,1f,30);
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
-					velocityX = 1f;
-					velocityY = 1f;
-					angle = 60 * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
 			break;
@@ -73,22 +76,23 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	
+	
 	void OnTriggerEnter(Collider other)
 	{
 		// if(other.gameObject.tag == "wall"){
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
-			case PLAYER_STATE.RIGHT:
-			playerState = PLAYER_STATE.LEFT;
-			jumpCnt = 0;
-			break;
-			case PLAYER_STATE.LEFT:
-			playerState = PLAYER_STATE.RIGHT;
-			jumpCnt = 0;
-			break;
-			case PLAYER_STATE.Air:
-			break;
+				case PLAYER_STATE.RIGHT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					break;
+				case PLAYER_STATE.LEFT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					break;
+				case PLAYER_STATE.Air:
+					break;
 			}
 		// }
 	}
@@ -96,4 +100,14 @@ public class PlayerController : MonoBehaviour {
 	public Vector3 GetPlayerPosition(){
 		return transform.position;
 	}
+	public PLAYER_STATE GetPlayerState(){
+		return playerState;
+	}
+
+	void SetPlayerSpeed(float vx, float vy, float ang){
+		velocityX = vx;
+		velocityY = vy;
+		angle = ang * Mathf.Deg2Rad;
+	}
+
 }
