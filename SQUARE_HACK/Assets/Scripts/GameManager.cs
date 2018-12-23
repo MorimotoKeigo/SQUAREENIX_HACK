@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
@@ -9,12 +9,13 @@ public class GameManager : MonoBehaviour {
 	//現在のFrameTime
 	public static float CurrentFrame;
 
-
-
 	[SerializeField]
-	public Vector3 LavaPositon;
-	public Vector3 PlayerPosition; 
+	//public Vector3 LavaPositon;
+	public GameObject Lava;
 	
+	//public Vector3 PlayerPosition; 
+	public GameObject Player;
+
 	void Awake(){
 		if (instance == null) {
 			instance = this;
@@ -38,12 +39,13 @@ public class GameManager : MonoBehaviour {
 		CalcCurrentFrame();
 		Debug.Log(GetCurrentFrameTime());
 		CheckHitLava();
+		MoveLavaPosition();
 	}
 
 	void InitGame(){
 		CurrentFrame = 0;
-		LavaPositon = new Vector3(0,0,0);
-		PlayerPosition = new Vector3(0,0,0);
+		//LavaPositon = new Vector3(0,0,0);
+		//PlayerPosition = new Vector3(0,0,0);
 	}
 
 	void CalcCurrentFrame(){
@@ -51,18 +53,25 @@ public class GameManager : MonoBehaviour {
 	}
 	void GameOver(){
 		Debug.Log("testGameOver");
+		Invoke("SceneChange",3.0f);
 	}
 
+	void SceneChange(){
+		SceneManager.LoadScene("RESULT");
+	}
 	float GetCurrentFrameTime(){
 		return CurrentFrame;
 	}
 
 	void CheckHitLava(){
-		var distance = PlayerPosition.y - LavaPositon.y;
+		float distance = Player.transform.position.y - Lava.transform.position.y;
 		if(distance <= 0){
 			Debug.Log("testCheckHitLava");
 			GameOver();
 		}
 	}
 	
+	void MoveLavaPosition(){
+		Lava.transform.position += new Vector3(0.0f,0.3f,0.0f);
+	}
 }
