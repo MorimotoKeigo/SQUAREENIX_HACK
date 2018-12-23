@@ -2,36 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHead : MonoBehaviour {
-	
-	private bool isHitHead = false;
+public class PlayerBody : MonoBehaviour {
 
-	public bool IsHitHead{
-		get{return isHitHead;}
-		set{isHitHead = value;}
+	private bool isHitBody = false;
+
+	public bool IsHitBody{
+		get{return isHitBody;}
+		set{isHitBody = value;}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		isHitHead = true;
+		isHitBody = true;
 		Debug.Log("enter");
 
 	}
 	void OnTriggerExit(Collider other) 
 	{
-		isHitHead = false;
+		isHitBody = false;
 		Debug.Log("exit");
+		
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
-		isHitHead = true;
 		Debug.Log("enter");
-
+		isHitBody = true;
 	}
 
 	void OnCollisionExit(Collision other) {
-		isHitHead = false;
+		isHitBody = false;
 		Debug.Log("exit");
 	}
 }

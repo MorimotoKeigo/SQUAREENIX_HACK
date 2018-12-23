@@ -10,20 +10,25 @@ public class PlayerController : MonoBehaviour {
 		Air
 	}
 	[SerializeField]
-	GameObject playerBody;
+	PlayerBody playerBody;
 	[SerializeField]
 	PlayerHead playerHead;
 	[SerializeField]
 	float velocityX,velocityY;
 	[SerializeField]
-	private PLAYER_STATE playerState;
+	private PLAYER_STATE playerState = PLAYER_STATE.RIGHT;
 	private float angle = 30;
 	private float targetAngle = 60;
 	// Use this for initialization
 	private int jumpCnt = 0;
 	private float time= 0;
+
+	private Rigidbody rigidBody;
+
+	void Awake() {
+		rigidBody = GetComponent<Rigidbody>();
+	}
 	void Start () {
-		playerState = PLAYER_STATE.RIGHT;
 	}
 	
 	// Update is called once per frame
@@ -31,7 +36,10 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space)){
 			Jump();
 		}
-		transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
+		// transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
+		rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * 10,Mathf.Sin(angle)  * velocityY * 10,0);
+		// Debug.Log(rigidBody.velocity);
+		
 
 		if(jumpCnt == 2)
 		{
@@ -49,9 +57,25 @@ public class PlayerController : MonoBehaviour {
 
 		if(playerHead.IsHitHead)
 		{
-			velocityY *= -1;
-			playerHead.IsHitHead = false;
+			velocityY = -1;
 			Debug.Log("head");
+		}
+		if(playerBody.IsHitBody)
+		{
+			velocityX = 0;
+			velocityY = 0;
+			switch(playerState){
+				case PLAYER_STATE.RIGHT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					break;
+				case PLAYER_STATE.LEFT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					break;
+				case PLAYER_STATE.Air:
+					break;
+			}
 		}
 	}
 
@@ -86,25 +110,49 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	
-	void OnTriggerEnter(Collider other)
-	{
-		// if(other.gameObject.tag == "wall"){
-			velocityX = 0;
-			velocityY = 0;
-			switch(playerState){
-				case PLAYER_STATE.RIGHT:
-					playerState = PLAYER_STATE.LEFT;
-					jumpCnt = 0;
-					break;
-				case PLAYER_STATE.LEFT:
-					playerState = PLAYER_STATE.RIGHT;
-					jumpCnt = 0;
-					break;
-				case PLAYER_STATE.Air:
-					break;
-			}
-		// }
-	}
+	// void OnTriggerEnter(Collider other)
+	// {
+	// 	// if(other.gameObject.tag == "wall"){
+	// 	if(!playerHead.IsHitHead)
+	// 	{
+	// 		velocityX = 0;
+	// 		velocityY = 0;
+	// 		switch(playerState){
+	// 			case PLAYER_STATE.RIGHT:
+	// 				playerState = PLAYER_STATE.LEFT;
+	// 				jumpCnt = 0;
+	// 				break;
+	// 			case PLAYER_STATE.LEFT:
+	// 				playerState = PLAYER_STATE.RIGHT;
+	// 				jumpCnt = 0;
+	// 				break;
+	// 			case PLAYER_STATE.Air:
+	// 				break;
+	// 		}
+	// 	}
+	// 	// }
+	// }
+
+	// void OnCollisionEnter(Collision other)
+	// {
+	// 	if(!playerHead.IsHitHead)
+	// 	{
+	// 		velocityX = 0;
+	// 		velocityY = 0;
+	// 		switch(playerState){
+	// 			case PLAYER_STATE.RIGHT:
+	// 				playerState = PLAYER_STATE.LEFT;
+	// 				jumpCnt = 0;
+	// 				break;
+	// 			case PLAYER_STATE.LEFT:
+	// 				playerState = PLAYER_STATE.RIGHT;
+	// 				jumpCnt = 0;
+	// 				break;
+	// 			case PLAYER_STATE.Air:
+	// 				break;
+	// 		}
+	// 	}
+	// }
 
 	public Vector3 GetPlayerPosition(){
 		return transform.position;
@@ -113,7 +161,8 @@ public class PlayerController : MonoBehaviour {
 		return playerState;
 	}
 
-	void SetPlayerSpeed(float vx, float vy, float ang){
+	void SetPlayerSpeed(float vx, float vy, float ang)
+	{
 		velocityX = vx;
 		velocityY = vy;
 		angle = ang * Mathf.Deg2Rad;
