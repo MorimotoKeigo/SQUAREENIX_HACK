@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour {
 	public float firstAngle = 30;
 	public float secondAngle = 60;
 	public float speed = 10;
-	public float increaseSpeed = 5;
-	public float decreaseSpeedBad = 5;
-	public float decreaseSpeedDamage = 10;
-	public float decreaseSpeedDouble = 3;
+	public float secondSpeed;
+	public float increaseGaugePerfect = 5;
+	public float decreaseGaugeBad = 5;
+	public float decreaseGaugeDamage = 10;
+	public float decreaseGaugeDouble = 3;
 	public JUST_RESULT justResult;
 	public SpriteRenderer playerRender;
 	// Use this for initialization
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 	private float collisionFrame = 0;
 	public AudioClip jumpSE;
 	public bool isDamage;
+	public float justGauge = 0;
 
 	public float CollisionFrame
 	{
@@ -64,7 +66,11 @@ public class PlayerController : MonoBehaviour {
 			
 		}
 		// transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
-		rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
+		if(jumpCnt == 2)
+			rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
+		else
+			rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
+
 		// Debug.Log(rigidBody.velocity);
 		
 		if(jumpCnt == 2)
@@ -74,7 +80,6 @@ public class PlayerController : MonoBehaviour {
 			{
 				if(firstAngle <= angle * Mathf.Rad2Deg)
 					angle -= 5 * Mathf.Deg2Rad;
-
 				time = 0f;
 			}
 		}else
@@ -118,7 +123,8 @@ public class PlayerController : MonoBehaviour {
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					velocityY = 1;
-					speed -= decreaseSpeedDouble;
+					// speed -= decreaseGaugeDouble;
+					justGauge -= decreaseGaugeDouble;
 					angle = secondAngle * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
@@ -133,7 +139,8 @@ public class PlayerController : MonoBehaviour {
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					velocityY = 1;
-					speed -= decreaseSpeedDouble;
+					// speed -= decreaseGaugeDouble;
+					justGauge -= decreaseGaugeDouble;
 					angle = secondAngle * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
@@ -152,19 +159,24 @@ public class PlayerController : MonoBehaviour {
 		if(nowTime - collisionFrame >= badFrame)
 		{
 			Debug.Log("bad");
-			speed -= decreaseSpeedBad;
+			// speed -= decreaseGaugeBad;
+			justGauge -= decreaseGaugeBad;
 			justResult = JUST_RESULT.BAD;
+			justGauge -= 6;
 		}
 		else if(nowTime - collisionFrame <= perfectFrame)
 		{
 			Debug.Log("perfect");
 			justResult = JUST_RESULT.PERFECT;	
-			speed += increaseSpeed;		
+			// speed += increaseGaugePerfect;		
+			justGauge += increaseGaugePerfect;
+
 		}
 		else if(nowTime - collisionFrame <= goodFrame)
 		{
 			justResult = JUST_RESULT.GOOD;
-			speed += increaseSpeed / 2;		
+			// speed += increaseGaugePerfect / 2;	
+			justGauge += increaseGaugePerfect / 2;		
 			Debug.Log("good");
 		}
 	}
@@ -181,13 +193,14 @@ public class PlayerController : MonoBehaviour {
 		if(other.gameObject.tag == "Damage" && !isDamage)
 		{
 			StartCoroutine(Blink());
-			speed -= decreaseSpeedDamage;
+			speed -= decreaseGaugeDamage;
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
 					playerState = PLAYER_STATE.LEFT;
 					jumpCnt = 0;
+					Jump();
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
@@ -221,6 +234,30 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	private void OnCollisionStay(Collision other) {
+		if(other.gameObject.tag == "Damage" && !isDamage)
+		{
+			StartCoroutine(Blink());
+			// speed -= decreaseSpeedDamage;
+			justGauge += decreaseGaugeDamage;
+			velocityX = 0;
+			velocityY = 0;
+			switch(playerState){
+				case PLAYER_STATE.RIGHT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.LEFT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.Air:
+					break;
+			}
+		}
+	}
 	private void OnCollisionExit(Collision other) {
 		rigidBody.useGravity = false;
 		
