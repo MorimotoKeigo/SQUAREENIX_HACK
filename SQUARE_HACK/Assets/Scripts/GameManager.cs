@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour {
 		MoveLavaPosition();
 		
 		MoveCamera();
+
 	}
 
 	void InitGame(){
@@ -80,6 +81,8 @@ public class GameManager : MonoBehaviour {
 		//FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(1);
 		//LavaPositon = new Vector3(0,0,0);
 		//PlayerPosition = new Vector3(0,0,0);
+		//ParticleManager.instance.PlayFX(new Vector3(0f,0f,0f),0);
+
 	}
 
 	void CalcCurrentFrame(){
@@ -87,7 +90,10 @@ public class GameManager : MonoBehaviour {
 	}
 	void GameOver(){
 		//Debug.Log("testGameOver");
-		Invoke("SceneChange",3.0f);
+		//ParticleManager.instance.PlayFX_tap(new Vector3(0f,0f,0f));
+
+		//ParticleManager.instance.PlayFX(new Vector3(0f,0f,0f),2);
+		Invoke("SceneChange",1.0f);
 	}
 
 	void SceneChange(){
@@ -101,7 +107,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void CheckHitLava(){
-		float distance = Player.transform.position.y - Lava.transform.position.y;
+		float distance = Player.transform.position.y - (Lava.transform.position.y + (Lava.transform.localScale.y / 2) );
 		
 
 
