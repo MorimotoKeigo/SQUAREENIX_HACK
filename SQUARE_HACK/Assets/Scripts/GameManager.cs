@@ -28,6 +28,15 @@ public class GameManager : MonoBehaviour {
 	
 	GameObject Camera;
 
+	[SerializeField]
+	public Vector3 LavaSpeed1;
+	
+	[SerializeField]
+	public Vector3  LavaSpeed2;
+	
+	[SerializeField]
+	public Vector3 LavaSpeed3;
+	
 
 	void Awake(){
 		if (instance == null) {
@@ -64,7 +73,7 @@ public class GameManager : MonoBehaviour {
 		Camera = GameObject.Find("Main Camera");
 
 		CurrentFrame = 0;
-		FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(1);
+		//FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(1);
 		//LavaPositon = new Vector3(0,0,0);
 		//PlayerPosition = new Vector3(0,0,0);
 	}
@@ -81,8 +90,7 @@ public class GameManager : MonoBehaviour {
 
 	void SceneChange(){
 		
-		//FadeSystem..GetComponent<FadeSystem>.Fadein();
-		FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(2);
+		//FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(2);
 		SoundManager.instance.StopSingleSound();
 		SceneManager.LoadScene("RESULT");
 	}
@@ -99,10 +107,13 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void MoveLavaPosition(){
-		Lava.transform.position += new Vector3(0.0f,0.01f,0.0f);
+		//Lava.transform.position += new Vector3(0.0f,0.01f,0.0f);
+		Lava.transform.position += LavaSpeed1;
 	}
 
 	void MoveCamera(){
+
+		
 		float offset = Player.transform.position.y - Camera.transform.position.y;
 		Camera.transform.position += new Vector3(0.0f, offset, 0.0f); 
 	}
