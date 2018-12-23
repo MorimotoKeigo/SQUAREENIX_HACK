@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	private int jumpCnt = 0;
 	private float time= 0;
-
 	private Rigidbody rigidBody;
 
 	void Awake() {
@@ -48,8 +47,9 @@ public class PlayerController : MonoBehaviour {
 			time += Time.deltaTime;
 			if(time >= 0.01f)
 			{
-				if(secondAngle >= angle * Mathf.Rad2Deg)
-					angle += 10 * Mathf.Deg2Rad;
+				if(firstAngle <= angle * Mathf.Rad2Deg)
+					angle -= 5 * Mathf.Deg2Rad;
+
 				time = 0f;
 			}
 		}else
@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour {
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
+					angle = secondAngle * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
 			break;
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour {
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
+					angle = secondAngle * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
 			break;
