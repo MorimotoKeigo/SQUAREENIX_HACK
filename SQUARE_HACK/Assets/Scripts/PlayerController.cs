@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour {
 	float velocityX,velocityY;
 	[SerializeField]
 	private PLAYER_STATE playerState = PLAYER_STATE.RIGHT;
-	private float angle = 30;
-	private float targetAngle = 60;
+	public float angle = 30;
+	public float speed = 10;
+	public float secondAngle = 60;
 	// Use this for initialization
 	private int jumpCnt = 0;
 	private float time= 0;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 			Jump();
 		}
 		// transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
-		rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * 10,Mathf.Sin(angle)  * velocityY * 10,0);
+		rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
 		// Debug.Log(rigidBody.velocity);
 		
 
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 			time += Time.deltaTime;
 			if(time >= 0.01f)
 			{
-				if(targetAngle >= angle * Mathf.Rad2Deg)
+				if(secondAngle >= angle * Mathf.Rad2Deg)
 					angle += 10 * Mathf.Deg2Rad;
 				time = 0f;
 			}
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 			velocityY = -1;
 			Debug.Log("head");
 		}
-		if(playerBody.IsHitBody)
+		else if(playerBody.IsHitBody)
 		{
 			velocityX = 0;
 			velocityY = 0;
@@ -133,26 +134,26 @@ public class PlayerController : MonoBehaviour {
 	// 	// }
 	// }
 
-	// void OnCollisionEnter(Collision other)
-	// {
-	// 	if(!playerHead.IsHitHead)
-	// 	{
-	// 		velocityX = 0;
-	// 		velocityY = 0;
-	// 		switch(playerState){
-	// 			case PLAYER_STATE.RIGHT:
-	// 				playerState = PLAYER_STATE.LEFT;
-	// 				jumpCnt = 0;
-	// 				break;
-	// 			case PLAYER_STATE.LEFT:
-	// 				playerState = PLAYER_STATE.RIGHT;
-	// 				jumpCnt = 0;
-	// 				break;
-	// 			case PLAYER_STATE.Air:
-	// 				break;
-	// 		}
-	// 	}
-	// }
+	void OnCollisionEnter(Collision other)
+	{
+		// if(!playerHead.IsHitHead)
+		// {
+			velocityX = 0;
+			velocityY = 0;
+			switch(playerState){
+				case PLAYER_STATE.RIGHT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					break;
+				case PLAYER_STATE.LEFT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					break;
+				case PLAYER_STATE.Air:
+					break;
+			}
+		// }
+	}
 
 	public Vector3 GetPlayerPosition(){
 		return transform.position;
