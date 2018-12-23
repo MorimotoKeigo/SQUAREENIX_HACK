@@ -21,17 +21,12 @@ public class PrintResult : MonoBehaviour {
 		switch(playerCtrl.GetJustResult()){
 			case PlayerController.JUST_RESULT.BAD:
 				resultText.text = "Bad";
-				Debug.Log("aa");
 				break;
 			case PlayerController.JUST_RESULT.GOOD:
 				resultText.text = "Good";
-				Debug.Log("aa");
-
 				break;
 			case PlayerController.JUST_RESULT.PERFECT:
 				resultText.text = "Perfect";
-				Debug.Log("aa");
-
 				break;
 
 		}

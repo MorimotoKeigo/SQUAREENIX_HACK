@@ -3,6 +3,7 @@
 --- !u!78 &1
 TagManager:
   tags:
+<<<<<<< HEAD
   - DamageObject
   - 
   Builtin Layer 0: Default
@@ -37,6 +38,44 @@ TagManager:
   User Layer 29: 
   User Layer 30: 
   User Layer 31: 
+=======
+  - PlayerHead
+  - Damage
+  - Head
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+>>>>>>> 96b2c37ad78d6f094bc0f2ca0902db662a095da4
   m_SortingLayers:
   - name: Default
     userID: 0

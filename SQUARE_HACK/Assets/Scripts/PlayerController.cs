@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public float firstAngle = 30;
 	public float secondAngle = 60;
 	public float speed = 10;
+	public float riseSpeed = 5;
 	public JUST_RESULT justResult;
 	// Use this for initialization
 	private int jumpCnt = 0;
@@ -108,6 +109,8 @@ public class PlayerController : MonoBehaviour {
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
+					velocityY = 1;
+					speed -= riseSpeed / 2;
 					angle = secondAngle * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
@@ -119,6 +122,8 @@ public class PlayerController : MonoBehaviour {
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
+					velocityY = 1;
+					speed -= riseSpeed / 2;
 					angle = secondAngle * Mathf.Deg2Rad;
 					jumpCnt++;
 				}
@@ -137,44 +142,27 @@ public class PlayerController : MonoBehaviour {
 		if(nowTime - collisionFrame >= badFrame)
 		{
 			Debug.Log("bad");
+			speed -= riseSpeed / 2;
 			justResult = JUST_RESULT.BAD;
 		}
 		else if(nowTime - collisionFrame <= perfectFrame)
 		{
 			Debug.Log("perfect");
-			justResult = JUST_RESULT.PERFECT;			
+			justResult = JUST_RESULT.PERFECT;	
+			speed += riseSpeed;		
 		}
 		else if(nowTime - collisionFrame <= goodFrame)
 		{
 			justResult = JUST_RESULT.GOOD;
+			speed += riseSpeed / 2;		
+			Debug.Log("good");
 		}
 	}
 
 	public JUST_RESULT GetJustResult(){
 		return justResult;
 	}
-	// void OnTriggerEnter(Collider other)
-	// {
-	// 	// if(other.gameObject.tag == "wall"){
-	// 	if(!playerHead.IsHitHead)
-	// 	{
-	// 		velocityX = 0;
-	// 		velocityY = 0;
-	// 		switch(playerState){
-	// 			case PLAYER_STATE.RIGHT:
-	// 				playerState = PLAYER_STATE.LEFT;
-	// 				jumpCnt = 0;
-	// 				break;
-	// 			case PLAYER_STATE.LEFT:
-	// 				playerState = PLAYER_STATE.RIGHT;
-	// 				jumpCnt = 0;
-	// 				break;
-	// 			case PLAYER_STATE.Air:
-	// 				break;
-	// 		}
-	// 	}
-	// 	// }
-	// }
+
 
 	void OnCollisionEnter(Collision other)
 	{
@@ -199,6 +187,9 @@ public class PlayerController : MonoBehaviour {
 				case PLAYER_STATE.Air:
 					break;
 			}
+		}else if(other.gameObject.tag == "Head")
+		{
+			velocityY = -1;
 		}else{
 			rigidBody.useGravity = true;
 			collisionFrame = GameManager.instance.GetCurrentFrameTime();
