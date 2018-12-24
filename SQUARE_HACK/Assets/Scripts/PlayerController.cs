@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour {
 		RIGHT,
 		LEFT,
 		AIR_LEFT,
-		AIR_RIGHT
+		AIR_RIGHT,
+		LAST_JUMP,
 	}
 	public enum JUST_RESULT{
 		BAD,
@@ -84,6 +85,11 @@ public class PlayerController : MonoBehaviour {
 			if(jumpCnt == 0)
 				JustResult();
 			Jump();
+		}
+		if(playerState == PLAYER_STATE.LAST_JUMP)
+		{
+			velocityX = 0;
+			velocityY = 1;
 		}
 
 		// transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
