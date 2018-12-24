@@ -276,7 +276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -154, y: -92.47912}
+  m_AnchoredPosition: {x: -184, y: -193}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340263652
@@ -312,10 +312,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -385,22 +385,22 @@ Prefab:
     - target: {fileID: 224795647954171788, guid: e545c523bd2834968900a11814c44991,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 63
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 224795647954171788, guid: e545c523bd2834968900a11814c44991,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 118
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 224795647954171788, guid: e545c523bd2834968900a11814c44991,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 224795647954171788, guid: e545c523bd2834968900a11814c44991,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 224795647954171788, guid: e545c523bd2834968900a11814c44991,
         type: 2}
@@ -437,6 +437,16 @@ Prefab:
       propertyPath: timeText
       value: 
       objectReference: {fileID: 1846552148}
+    - target: {fileID: 114866979855566086, guid: e545c523bd2834968900a11814c44991,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114866979855566086, guid: e545c523bd2834968900a11814c44991,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e545c523bd2834968900a11814c44991, type: 2}
   m_IsPrefabParent: 0
@@ -502,6 +512,11 @@ Prefab:
         type: 2}
       propertyPath: decreaseGaugeDouble
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114560089958772056, guid: 33decd849c7af4cc88e0e56707a997cb,
+        type: 2}
+      propertyPath: secondAngle
+      value: 85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33decd849c7af4cc88e0e56707a997cb, type: 2}

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 	public JUST_RESULT justResult;
 	public SpriteRenderer playerRender;
 	// Use this for initialization
-	private int jumpCnt = 0;
+	public int jumpCnt = 0;
 	private float time= 0;
 	private Rigidbody rigidBody;
 	private float collisionFrame = 0;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
 	public float badFrame = 1.0f;
 	public float goodFrame = 0.5f;
 	public float perfectFrame = 0.25f;
-	
+
 	private GameObject trailFX; 
 
 	void Awake() {
