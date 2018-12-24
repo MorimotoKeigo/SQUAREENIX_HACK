@@ -2,33 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class ResultManager : MonoBehaviour {
 
+public class TitleManager : MonoBehaviour {
 
 	[SerializeField]
 	private AudioClip BGM;
 	
 	[SerializeField]
-	private AudioClip SE;
-	
-
-
+	private AudioClip SE1;
 	// Use this for initialization
 	void Start () {
-		SoundManager.instance.PlaySingleSound(BGM);	
+		SoundManager.instance.PlaySingleSound(BGM);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 		if(Input.GetKeyDown(KeyCode.Space)){
-			ChangeScene();
+			ChangeScene();		
 		}
-		
 	}
 
 	void ChangeScene(){
-		SoundManager.instance.PlaySoundSE(SE);
-		SceneManager.LoadScene("TITLE");
+		SoundManager.instance.PlaySoundSE(SE1);
+		SceneManager.LoadScene("GAME");
 	}
 }
