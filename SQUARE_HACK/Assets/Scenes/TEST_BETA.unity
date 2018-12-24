@@ -500,6 +500,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &963188328
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.3854294
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513291169782954, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714547512916564, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_TagString
+      value: Damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714547512916564, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+      propertyPath: m_Name
+      value: StopDamage (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4c6d12570113f48aba18d70ab6996872, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &981071543
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +839,11 @@ Prefab:
     - target: {fileID: 54188677675401648, guid: 33decd849c7af4cc88e0e56707a997cb,
         type: 2}
       propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54188677675401648, guid: 33decd849c7af4cc88e0e56707a997cb,
+        type: 2}
+      propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

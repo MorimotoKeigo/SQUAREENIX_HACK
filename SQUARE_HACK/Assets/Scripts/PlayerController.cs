@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour {
 	public enum PLAYER_STATE{
 		RIGHT,
 		LEFT,
-		Air
+		AIR_LEFT,
+		AIR_RIGHT
 	}
 	public enum JUST_RESULT{
 		BAD,
@@ -123,8 +124,11 @@ public class PlayerController : MonoBehaviour {
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
 					break;
-				case PLAYER_STATE.Air:
+				case PLAYER_STATE.AIR_LEFT:
 					break;
+				case PLAYER_STATE.AIR_RIGHT:
+					break;
+				
 			}
 		}
 
@@ -143,9 +147,25 @@ public class PlayerController : MonoBehaviour {
 					//SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					FirstJumpFX();
 					playerAnim.SetInteger("State",4);
-
+					playerState = PLAYER_STATE.AIR_LEFT;
 					
-				}else if(jumpCnt == 1)
+				}
+				
+			break;
+			case PLAYER_STATE.LEFT:
+				if(jumpCnt == 0)
+				{
+					//SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
+					FirstJumpFX();
+					SetPlayerSpeed(1f,1f,firstAngle);
+					playerAnim.SetInteger("State",6);
+					playerState = PLAYER_STATE.AIR_RIGHT;
+					jumpCnt++;
+				}
+				
+			break;
+			case PLAYER_STATE.AIR_LEFT:
+				if(jumpCnt == 1)
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					secondJumpFX();
@@ -156,16 +176,9 @@ public class PlayerController : MonoBehaviour {
 					playerAnim.SetInteger("State",5);
 					jumpCnt++;
 				}
-			break;
-			case PLAYER_STATE.LEFT:
-				if(jumpCnt == 0)
-				{
-					//SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
-					FirstJumpFX();
-					SetPlayerSpeed(1f,1f,firstAngle);
-					playerAnim.SetInteger("State",6);
-					jumpCnt++;
-				}else if(jumpCnt == 1)
+				break;
+			case PLAYER_STATE.AIR_RIGHT:
+				if(jumpCnt == 1)
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					secondJumpFX();
@@ -176,12 +189,7 @@ public class PlayerController : MonoBehaviour {
 					playerAnim.SetInteger("State",7);
 					jumpCnt++;
 				}
-			break;
-			case PLAYER_STATE.Air:
-				velocityX = 0;
-				velocityY = 0;
-				jumpCnt = 0;
-			break;
+				break;
 
 		}
 	}
@@ -247,25 +255,31 @@ public class PlayerController : MonoBehaviour {
 			if(!isDamage)
 				StartCoroutine(Blink());
 
-
 			justGauge -= decreaseGaugeDamage;
 			velocityX = 0;
 			velocityY = 0;
+			//ダメージ入った時
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
-					playerState = PLAYER_STATE.LEFT;
 					Debug.Log("Damage");
 					jumpCnt = 0;
 					Jump();
 					break;
 				case PLAYER_STATE.LEFT:
-					playerState = PLAYER_STATE.RIGHT;
 					Debug.Log("Damage");
 					jumpCnt = 0;
 					Jump();
 
 					break;
-				case PLAYER_STATE.Air:
+				case PLAYER_STATE.AIR_LEFT:
+					jumpCnt = 0;
+					playerState = PLAYER_STATE.LEFT;
+					Jump();
+					break;
+				case PLAYER_STATE.AIR_RIGHT:
+					jumpCnt = 0;
+					playerState = PLAYER_STATE.RIGHT;
+					Jump();
 					break;
 			}
 			
@@ -289,19 +303,29 @@ public class PlayerController : MonoBehaviour {
 			velocityY = 0;
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
+					// playerState = PLAYER_STATE.LEFT;
+					// Debug.Log("normal");
+					// jumpCnt = 0;
+					// playerAnim.SetInteger("State",3);
+
+					break;
+				case PLAYER_STATE.LEFT:
+					// playerState = PLAYER_STATE.RIGHT;
+					// Debug.Log("normal");
+					// jumpCnt = 0;
+					// playerAnim.SetInteger("State",2);					
+					break;
+				case PLAYER_STATE.AIR_LEFT:
 					playerState = PLAYER_STATE.LEFT;
 					Debug.Log("normal");
 					jumpCnt = 0;
 					playerAnim.SetInteger("State",3);
-
 					break;
-				case PLAYER_STATE.LEFT:
+				case PLAYER_STATE.AIR_RIGHT:
 					playerState = PLAYER_STATE.RIGHT;
 					Debug.Log("normal");
 					jumpCnt = 0;
-					playerAnim.SetInteger("State",2);					
-					break;
-				case PLAYER_STATE.Air:
+					playerAnim.SetInteger("State",2);	
 					break;
 			}
 		
@@ -378,16 +402,22 @@ public class PlayerController : MonoBehaviour {
 			isStopDamage = false;
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
-					playerState = PLAYER_STATE.LEFT;
 					jumpCnt = 0;
 					Jump();
 					break;
 				case PLAYER_STATE.LEFT:
-					playerState = PLAYER_STATE.RIGHT;
 					jumpCnt = 0;
 					Jump();
 					break;
-				case PLAYER_STATE.Air:
+				case PLAYER_STATE.AIR_LEFT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.AIR_RIGHT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					Jump();
 					break;
 			}
 			yield break;				
