@@ -59,16 +59,20 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(justGauge < 0)
+			justGauge = 0;
+		else if(justGauge > 300)
+			justGauge = 300;
 		if(Input.GetKeyDown(KeyCode.Space)){
 			if(jumpCnt == 0)
 				JustResult();
 			Jump();
-			
 		}
+
 		// transform.position += new Vector3(Mathf.Cos(angle) * velocityX,Mathf.Sin(angle) * velocityY,0);
-		if(jumpCnt == 2)
-			rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
-		else
+		// if(jumpCnt == 2)
+		// 	rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
+		// else
 			rigidBody.velocity = new Vector3(Mathf.Cos(angle) * velocityX * speed,Mathf.Sin(angle)  * velocityY * speed,0);
 
 		// Debug.Log(rigidBody.velocity);
@@ -119,9 +123,12 @@ public class PlayerController : MonoBehaviour {
 					SetPlayerSpeed(-1f,1f,firstAngle);
 					jumpCnt++;
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
+					FirstJumpFX();
+					
 				}else if(jumpCnt == 1)
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
+					secondJumpFX();
 					velocityY = 1;
 					// speed -= decreaseGaugeDouble;
 					justGauge -= decreaseGaugeDouble;
@@ -133,11 +140,13 @@ public class PlayerController : MonoBehaviour {
 				if(jumpCnt == 0)
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
+					FirstJumpFX();
 					SetPlayerSpeed(1f,1f,firstAngle);
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
+					secondJumpFX();
 					velocityY = 1;
 					// speed -= decreaseGaugeDouble;
 					justGauge -= decreaseGaugeDouble;
@@ -152,6 +161,14 @@ public class PlayerController : MonoBehaviour {
 			break;
 
 		}
+	}
+	public void FirstJumpFX(){
+		ParticleManager.instance.PlayFX(transform.position,1);
+		ParticleManager.instance.PlayFX(transform.position,3);
+	}
+	public void secondJumpFX(){
+		ParticleManager.instance.PlayFX(transform.position,1);
+		ParticleManager.instance.PlayFX(transform.position,2);
 	}
 	public void JustResult()
 	{	
@@ -193,7 +210,7 @@ public class PlayerController : MonoBehaviour {
 		if(other.gameObject.tag == "Damage" && !isDamage)
 		{
 			StartCoroutine(Blink());
-			speed -= decreaseGaugeDamage;
+			justGauge -= decreaseGaugeDamage;
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
@@ -201,11 +218,13 @@ public class PlayerController : MonoBehaviour {
 					playerState = PLAYER_STATE.LEFT;
 					jumpCnt = 0;
 					Jump();
+					Debug.Log("jump");	
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
 					jumpCnt = 0;
 					Jump();
+					Debug.Log("jump");	
 					break;
 				case PLAYER_STATE.Air:
 					break;
@@ -238,8 +257,7 @@ public class PlayerController : MonoBehaviour {
 		if(other.gameObject.tag == "Damage" && !isDamage)
 		{
 			StartCoroutine(Blink());
-			// speed -= decreaseSpeedDamage;
-			justGauge += decreaseGaugeDamage;
+			justGauge -= decreaseGaugeDamage;
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
