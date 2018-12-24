@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour {
 
 	void GameStart(){
 		GameStartFrag = true;
-		Player.GetComponent<Animator>().SetInteger("State", 4);
+		//Player.GetComponent<Animator>().SetInteger("State", 4);
 	}
 
 
