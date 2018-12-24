@@ -18,6 +18,7 @@ public class ParticleManager : MonoBehaviour {
 
 	[SerializeField]
 	public float DestoroyTime = 1.0f;
+	public float lateDestoroyTime = 5.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +38,13 @@ public class ParticleManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public GameObject PlayTrailFX(Vector3 pos, int id){
+		FX_List_Inst = Instantiate(FX_List[id], pos , Quaternion.identity);
+		Destroy(FX_List_Inst,lateDestoroyTime);
+		return FX_List_Inst;
+	}
+
 
 	public void PlayFX(Vector3 pos,int id){
 		//FX_tap_Inst = Instantiate(FX_tap, pos,Quaternion.identity);		

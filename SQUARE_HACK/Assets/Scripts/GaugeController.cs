@@ -19,22 +19,27 @@ public class GaugeController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(playerController.justGauge >= 0 && playerController.justGauge <= 100)
+		if(playerController.justGauge >= 0 && playerController.justGauge < 100)
 		{
 			one.value = playerController.justGauge;
+			two.value = 100;
 			playerController.speed = 20f;
 		}
-		else if(playerController.justGauge >= 100 && playerController.justGauge <= 200)
+		else if(playerController.justGauge >= 100 && playerController.justGauge < 200)
 		{
+			one.value = 100;
 			two.value = playerController.justGauge;
+			three.value = 200;
 			playerController.speed = 20f * 1.5f;
 
 		}
 		else if(playerController.justGauge >= 200)
 		{
+			two.value = 200;
 			three.value = playerController.justGauge;
 			playerController.speed = 20f * 2.0f;
 
 		}
+
 	}
 }

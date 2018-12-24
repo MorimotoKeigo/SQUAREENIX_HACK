@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 	private float collisionFrame = 0;
 	public AudioClip jumpSE;
 	public bool isDamage;
+	public bool isStopDamage;
 	public float justGauge = 0;
 
 	public float CollisionFrame
@@ -47,9 +48,11 @@ public class PlayerController : MonoBehaviour {
 		get{return collisionFrame;}
 	}
 
-	const float badFrame = 1.0f;
-	const float goodFrame = 0.5f;
-	const float perfectFrame = 0.25f;
+	public float badFrame = 1.0f;
+	public float goodFrame = 0.5f;
+	public float perfectFrame = 0.25f;
+	
+	private GameObject trailFX; 
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody>();
@@ -116,6 +119,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Jump(){
+		if(isStopDamage)
+			return;
 		switch(playerState){
 			case PLAYER_STATE.RIGHT:
 				if(jumpCnt == 0)
@@ -164,10 +169,15 @@ public class PlayerController : MonoBehaviour {
 	}
 	public void FirstJumpFX(){
 		ParticleManager.instance.PlayFX(transform.position,1);
-		ParticleManager.instance.PlayFX(transform.position,3);
+		if(playerState == PLAYER_STATE.LEFT)
+			ParticleManager.instance.PlayFX(transform.position,3);
+		else if(playerState == PLAYER_STATE.RIGHT)
+			ParticleManager.instance.PlayFX(transform.position,4);
+
+			
 	}
 	public void secondJumpFX(){
-		ParticleManager.instance.PlayFX(transform.position,1);
+		trailFX = ParticleManager.instance.PlayTrailFX(transform.position,1);
 		ParticleManager.instance.PlayFX(transform.position,2);
 	}
 	public void JustResult()
@@ -218,17 +228,25 @@ public class PlayerController : MonoBehaviour {
 					playerState = PLAYER_STATE.LEFT;
 					jumpCnt = 0;
 					Jump();
-					Debug.Log("jump");	
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
 					jumpCnt = 0;
 					Jump();
-					Debug.Log("jump");	
 					break;
 				case PLAYER_STATE.Air:
 					break;
 			}
+			
+			
+		}
+		else if(other.gameObject.tag == "StopDamage" && !isStopDamage)
+		{
+			StartCoroutine(StopDamage());
+			justGauge -= decreaseGaugeDamage;
+			velocityX = 0;
+			velocityY = 0;
+			
 		}else if(other.gameObject.tag == "Head")
 		{
 			velocityY = -1;
@@ -254,6 +272,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnCollisionStay(Collision other) {
+		
 		if(other.gameObject.tag == "Damage" && !isDamage)
 		{
 			StartCoroutine(Blink());
@@ -278,7 +297,6 @@ public class PlayerController : MonoBehaviour {
 	}
 	private void OnCollisionExit(Collision other) {
 		rigidBody.useGravity = false;
-		
 	}
 
 	public Vector3 GetPlayerPosition(){
@@ -304,11 +322,42 @@ public class PlayerController : MonoBehaviour {
 			{
             playerRender.enabled = true;
 			isDamage = false;
+			
 			yield break;				
 			}
             playerRender.enabled = !playerRender.enabled;
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+	IEnumerator StopDamage(){
+		float start = GameManager.instance.GetCurrentFrameTime();
+		 isStopDamage = true;
+        while ( true ) {
+			var now = GameManager.instance.GetCurrentFrameTime();
+			if(now - start >= 1)
+			{
+            playerRender.enabled = true;
+			isStopDamage = false;
+			switch(playerState){
+				case PLAYER_STATE.RIGHT:
+					playerState = PLAYER_STATE.LEFT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.LEFT:
+					playerState = PLAYER_STATE.RIGHT;
+					jumpCnt = 0;
+					Jump();
+					break;
+				case PLAYER_STATE.Air:
+					break;
+			}
+			yield break;				
+			}
+            playerRender.enabled = !playerRender.enabled;
+            yield return new WaitForSeconds(0.1f);
+        }
+	}
 
 }

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerHead
+  - Head
+  - Damage
+  - StopDamage
   layers:
   - Default
   - TransparentFX
