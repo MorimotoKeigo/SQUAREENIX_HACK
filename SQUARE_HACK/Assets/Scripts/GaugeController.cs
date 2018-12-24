@@ -10,6 +10,7 @@ public class GaugeController : MonoBehaviour {
 	public Slider one;
 	public Slider two;
 	public Slider three;
+	public Image max;
 	public PlayerController playerController;
 
 	// Use this for initialization
@@ -33,12 +34,16 @@ public class GaugeController : MonoBehaviour {
 			playerController.speed = 20f * 1.5f;
 
 		}
-		else if(playerController.justGauge >= 200)
+		else if(playerController.justGauge >= 200 && playerController.justGauge < 300)
 		{
 			two.value = 200;
 			three.value = playerController.justGauge;
 			playerController.speed = 20f * 2.0f;
-
+			max.enabled = false;
+		}
+		else if(playerController.justGauge >= 300)
+		{
+			max.enabled = true;
 		}
 
 	}

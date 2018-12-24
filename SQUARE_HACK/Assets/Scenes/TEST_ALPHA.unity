@@ -584,7 +584,7 @@ MonoBehaviour:
   m_MinValue: 200
   m_MaxValue: 300
   m_WholeNumbers: 0
-  m_Value: 200
+  m_Value: 300
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1298,7 +1298,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1813622455}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1761,6 +1761,11 @@ Prefab:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114473100340535376, guid: c49d22479cd064017b6f595dcd69a719,
+        type: 2}
+      propertyPath: max
+      value: 
+      objectReference: {fileID: 1813622457}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c49d22479cd064017b6f595dcd69a719, type: 2}
   m_IsPrefabParent: 0
