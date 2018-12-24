@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour {
 
 	private GameObject trailFX; 
 	private float prevTime;
+	private float stayPrevTime;
 
 
 	void Awake() {
@@ -154,6 +155,8 @@ public class PlayerController : MonoBehaviour {
 					FirstJumpFX();
 					playerAnim.SetInteger("State",4);
 					playerState = PLAYER_STATE.AIR_LEFT;
+					stayPrevTime = GameManager.instance.GetCurrentFrameTime();
+
 					
 				}
 				
@@ -167,6 +170,8 @@ public class PlayerController : MonoBehaviour {
 					playerAnim.SetInteger("State",6);
 					playerState = PLAYER_STATE.AIR_RIGHT;
 					jumpCnt++;
+					stayPrevTime = GameManager.instance.GetCurrentFrameTime();
+
 				}
 				
 			break;
@@ -301,7 +306,7 @@ public class PlayerController : MonoBehaviour {
 		}else if(other.gameObject.tag == "Head")
 		{
 			velocityY = -1;
-		}else{
+		}else if(other.gameObject.tag == "Wall"){
 			
 			rigidBody.useGravity = true;
 			collisionFrame = GameManager.instance.GetCurrentFrameTime();
@@ -338,30 +343,108 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	// private void OnCollisionStay(Collision other) {
-		
-	// 	if(other.gameObject.tag == "Damage" && !isDamage)
-	// 	{
-	// 		StartCoroutine(Blink());
-	// 		justGauge -= decreaseGaugeDamage;
-	// 		velocityX = 0;
-	// 		velocityY = 0;
-	// 		switch(playerState){
-	// 			case PLAYER_STATE.RIGHT:
-	// 				playerState = PLAYER_STATE.LEFT;
-	// 				jumpCnt = 0;
-	// 				Jump();
-	// 				break;
-	// 			case PLAYER_STATE.LEFT:
-	// 				playerState = PLAYER_STATE.RIGHT;
-	// 				jumpCnt = 0;
-	// 				Jump();
-	// 				break;
-	// 			case PLAYER_STATE.Air:
-	// 				break;
-	// 		}
-	// 	}
-	// }
+	private void OnCollisionStay(Collision other) {
+			Debug.Log(other.gameObject.name);
+		var nowTime = GameManager.instance.GetCurrentFrameTime();
+
+		if(nowTime - stayPrevTime < 0.1f)
+			return;
+		if(other.gameObject.tag == "Damage" && !isDamage)
+		{
+			// StartCoroutine(Blink());
+			// justGauge -= decreaseGaugeDamage;
+			// velocityX = 0;
+			// velocityY = 0;
+			// switch(playerState){
+			// 	case PLAYER_STATE.RIGHT:
+			// 		// playerState = PLAYER_STATE.LEFT;
+			// 		// jumpCnt = 0;
+			// 		// Jump();
+			// 		break;
+			// 	case PLAYER_STATE.LEFT:
+			// 		// playerState = PLAYER_STATE.RIGHT;
+			// 		// jumpCnt = 0;
+			// 		// Jump();
+			// 		break;
+			// 	case PLAYER_STATE.AIR_LEFT:
+			// 		playerState = PLAYER_STATE.LEFT;
+			// 		Debug.Log("normal");
+			// 		playerAnim.SetInteger("State",3);
+			// 		break;
+			// 	case PLAYER_STATE.AIR_RIGHT:
+			// 		playerState = PLAYER_STATE.RIGHT;
+			// 		Debug.Log("normal");
+			// 		playerAnim.SetInteger("State",2);
+			// 		break;
+			// }
+
+		}
+		else if(other.gameObject.tag == "StopDamage" && !isStopDamage)
+		{
+			StartCoroutine(StopDamage());
+			justGauge -= decreaseGaugeDamage;
+			velocityX = 0;
+			velocityY = 0;
+			
+			// switch(playerState){
+			// 	case PLAYER_STATE.RIGHT:
+			// 		// playerState = PLAYER_STATE.LEFT;
+			// 		// jumpCnt = 0;
+			// 		// Jump();
+			// 		break;
+			// 	case PLAYER_STATE.LEFT:
+			// 		// playerState = PLAYER_STATE.RIGHT;
+			// 		// jumpCnt = 0;
+			// 		// Jump();
+			// 		break;
+			// 	case PLAYER_STATE.AIR_LEFT:
+			// 		playerState = PLAYER_STATE.LEFT;
+			// 		Debug.Log("normal");
+			// 		playerAnim.SetInteger("State",3);
+			// 		break;
+			// 	case PLAYER_STATE.AIR_RIGHT:
+			// 		playerState = PLAYER_STATE.RIGHT;
+			// 		Debug.Log("normal");
+			// 		playerAnim.SetInteger("State",2);
+			// 		break;
+			// }
+
+		}
+		else if(other.gameObject.tag =="Head")
+		{
+			velocityY = -1;
+		}
+		else if(other.gameObject.tag == "Wall")
+		{
+
+			
+			switch(playerState){
+				case PLAYER_STATE.RIGHT:
+					// playerState = PLAYER_STATE.LEFT;
+					// jumpCnt = 0;
+					// Jump();
+					break;
+				case PLAYER_STATE.LEFT:
+					// playerState = PLAYER_STATE.RIGHT;
+					// jumpCnt = 0;
+					// Jump();
+					break;
+				case PLAYER_STATE.AIR_LEFT:
+					jumpCnt = 0;
+					playerState = PLAYER_STATE.LEFT;
+					Debug.Log("normal");
+					playerAnim.SetInteger("State",3);
+					break;
+				case PLAYER_STATE.AIR_RIGHT:
+					jumpCnt = 0;
+					playerState = PLAYER_STATE.RIGHT;
+					Debug.Log("normal");
+					playerAnim.SetInteger("State",2);
+					break;
+			}
+	
+		}
+	}
 	private void OnCollisionExit(Collision other) {
 		rigidBody.useGravity = false;
 	}
@@ -423,7 +506,7 @@ public class PlayerController : MonoBehaviour {
 				case PLAYER_STATE.AIR_RIGHT:
 					playerState = PLAYER_STATE.RIGHT;
 					jumpCnt = 0;
-					Jump();
+					Jump();	
 					break;
 			}
 			yield break;				
