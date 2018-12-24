@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeSprite:
+  - {fileID: 21300018, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300000, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300002, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300004, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
@@ -464,7 +465,6 @@ MonoBehaviour:
   - {fileID: 21300012, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300014, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300016, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
-  - {fileID: 21300018, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300020, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300022, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
   - {fileID: 21300024, guid: c792b1b62c732459c9cd63d933263b67, type: 3}
@@ -472,7 +472,13 @@ MonoBehaviour:
   nowTime: 0
   startTime: 0
   timeText: {fileID: 0}
-  timeObject: []
+  timeImage:
+  - {fileID: 114183082015816600}
+  - {fileID: 114586245216072398}
+  - {fileID: 114085834581770874}
+  - {fileID: 114871563570615048}
+  - {fileID: 114465731824646408}
+  - {fileID: 114164345409391460}
 --- !u!114 &114164345409391460
 MonoBehaviour:
   m_ObjectHideFlags: 1
