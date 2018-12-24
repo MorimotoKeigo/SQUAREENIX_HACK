@@ -10,6 +10,8 @@ public class TimeController : MonoBehaviour {
 	public float startTime;
 	public Text timeText;
 	public List<Image> timeImage;
+
+	public static float TookTime;
 	// Use this for initialization
 	void Awake() {
 		timeText = GetComponent<Text>();
@@ -35,6 +37,7 @@ public class TimeController : MonoBehaviour {
 		timeImage[4].sprite = timeSprite[Int16.Parse(millisStr.Substring(0,1))];
 		timeImage[5].sprite = timeSprite[Int16.Parse(millisStr.Substring(1,1))];
 		
+		TookTime = diffTime;
 		// if(second / 10 == 0)
 		// 	timeText.text = minute + ":0" + second + "." + millisStr;
 		// else

@@ -47,9 +47,16 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	float maxPlayerPosY = 0;
 
-	[SerializeField]
 	//GameObject SceneUnit = null;
 
+	[SerializeField]
+	public float dist;
+
+
+	public Vector3 CameraFirstPosition ;
+	public Vector3 CameraPlayPosotion;
+	
+	
 	void Awake(){
 		if (instance == null) {
 			instance = this;
@@ -69,7 +76,12 @@ public class GameManager : MonoBehaviour {
 	bool  Starting = false;
 	// Use this for initialization
 	void Start () {
-		SoundManager.instance.PlaySingleSound(BGM);
+
+		
+		Camera.transform.position = CameraFirstPosition;
+
+		CalcHeight();
+		//SoundManager.instance.PlaySingleSound(BGM);
 	}
 	
 	// Update is called once per frame
@@ -81,17 +93,23 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if(GameStartFrag == true){
-		CalcCurrentFrame();
+			CalcCurrentFrame();
 		
 		
-		CheckHitLava();
-		MoveLavaPosition();
+			CheckHitLava();
+			MoveLavaPosition();
 		
-		MoveCamera();
+			MoveCamera();
 
+
+			CalcHeight();
 			if(Player.transform.position.y > ClearHeight){
 				GameClear();
 			}
+
+
+
+
 		}
 
 	}
@@ -189,17 +207,27 @@ public class GameManager : MonoBehaviour {
 	void GameStart(){
 		
 		GameStartFrag = true;
+		//Camera.transform.position = Vector3.Lerp(CameraFirstPosition, CameraPlayPosotion, 5 * Time.deltaTime);
+		Camera.transform.position = CameraPlayPosotion;
 		//Player.GetComponent<Animator>().SetInteger("State", 4);
 	}
 
 	void GameClear(){
-		TimeToResult.instance.GetComponent<TimeToResult>().RecordTime(GetCurrentFrameTime());
+		TimeToResult.instance.GetComponent<TimeToResult>().RecordTime(TimeController.TookTime);
 		
 		FadeManager.FadeOut();
-		Debug.Log("FadeFade");
+		//Debug.Log("FadeFade");
 		
 		Invoke("SceneChange",SceneChangeTime);
 	}
 
+	void CalcHeight(){
+		dist = ClearHeight - Player.transform.position.y;
+		Debug.Log(dist);
+	}
+	
+	public float GetHeight(){
+		return dist;
+	}
 
 }
