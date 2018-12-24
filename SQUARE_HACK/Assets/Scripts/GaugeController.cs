@@ -12,7 +12,17 @@ public class GaugeController : MonoBehaviour {
 	public Slider three;
 	public Image max;
 	public PlayerController playerController;
-
+	public Image Number;
+	public Sprite zero;
+	public Sprite ichi;
+	public Sprite ni;
+	public Sprite san;
+	public Sprite man;
+	public GameObject effect;
+	public GameObject effectOneTwo;
+	public GameObject effectTwoThree;
+	void Awake(){
+	}
 	// Use this for initialization
 	void Start () {
 		
@@ -25,6 +35,9 @@ public class GaugeController : MonoBehaviour {
 			one.value = playerController.justGauge;
 			two.value = 100;
 			playerController.speed = 20f;
+			Number.sprite = zero;
+			effectOneTwo.SetActive(false);
+
 		}
 		else if(playerController.justGauge >= 100 && playerController.justGauge < 200)
 		{
@@ -32,7 +45,11 @@ public class GaugeController : MonoBehaviour {
 			two.value = playerController.justGauge;
 			three.value = 200;
 			playerController.speed = 20f * 1.5f;
+			Number.sprite = ichi;
+			effectOneTwo.SetActive(true);
+			effectTwoThree.SetActive(false);
 
+			
 		}
 		else if(playerController.justGauge >= 200 && playerController.justGauge < 300)
 		{
@@ -40,10 +57,17 @@ public class GaugeController : MonoBehaviour {
 			three.value = playerController.justGauge;
 			playerController.speed = 20f * 2.0f;
 			max.enabled = false;
+			Number.sprite = san;
+			effectTwoThree.SetActive(true);
+			effectOneTwo.SetActive(false);
+
+
 		}
 		else if(playerController.justGauge >= 300)
 		{
 			max.enabled = true;
+			Number.sprite = man;
+
 		}
 
 	}
