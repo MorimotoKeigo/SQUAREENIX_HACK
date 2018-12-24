@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 30f727d6915d74f569450c3b0385aeb6
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: gazi_text_0
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -107,7 +108,21 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: gazi_text_0
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 28
+        width: 110
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

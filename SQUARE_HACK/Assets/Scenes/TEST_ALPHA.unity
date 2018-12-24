@@ -746,16 +746,16 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 586584816}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children: []
   m_Father: {fileID: 378618760}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -111, y: 0}
+  m_AnchoredPosition: {x: -97.1, y: 2.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &586584818
@@ -777,7 +777,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1c7c6f5b052bd4501866bebc4131dbea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dda85ea2f9cd3444f9ef00b5ef94688c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2063,31 +2063,31 @@ Prefab:
         type: 2}
       propertyPath: zero
       value: 
-      objectReference: {fileID: 21300000, guid: 1c7c6f5b052bd4501866bebc4131dbea,
+      objectReference: {fileID: 21300000, guid: dda85ea2f9cd3444f9ef00b5ef94688c,
         type: 3}
     - target: {fileID: 114473100340535376, guid: c49d22479cd064017b6f595dcd69a719,
         type: 2}
       propertyPath: ichi
       value: 
-      objectReference: {fileID: 21300000, guid: 97fc2cd429a12441a87ae7fa5bcfa845,
+      objectReference: {fileID: 21300002, guid: dda85ea2f9cd3444f9ef00b5ef94688c,
         type: 3}
     - target: {fileID: 114473100340535376, guid: c49d22479cd064017b6f595dcd69a719,
         type: 2}
       propertyPath: ni
       value: 
-      objectReference: {fileID: 21300000, guid: 58f3d68e2615c4fc69df8ab01392ad1c,
+      objectReference: {fileID: 21300004, guid: dda85ea2f9cd3444f9ef00b5ef94688c,
         type: 3}
     - target: {fileID: 114473100340535376, guid: c49d22479cd064017b6f595dcd69a719,
         type: 2}
       propertyPath: san
       value: 
-      objectReference: {fileID: 21300000, guid: b422bc6d34aea4f3eb01d5ab13b242a4,
+      objectReference: {fileID: 21300006, guid: dda85ea2f9cd3444f9ef00b5ef94688c,
         type: 3}
     - target: {fileID: 114473100340535376, guid: c49d22479cd064017b6f595dcd69a719,
         type: 2}
       propertyPath: man
       value: 
-      objectReference: {fileID: 21300000, guid: 9db335ecc484542c18cea4e169054949,
+      objectReference: {fileID: 21300000, guid: 30f727d6915d74f569450c3b0385aeb6,
         type: 3}
     - target: {fileID: 114473100340535376, guid: c49d22479cd064017b6f595dcd69a719,
         type: 2}
