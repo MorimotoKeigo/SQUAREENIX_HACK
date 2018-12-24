@@ -19,7 +19,7 @@ public class TimeController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		nowTime = GameManager.instance.GetCurrentFrameTime();
-		Debug.Log(nowTime - startTime);
+		// Debug.Log(nowTime - startTime);
 		var diffTime = nowTime - startTime;
 		int minute = (int)(diffTime / 60f);
 		int second = (int)(diffTime % 60f);
