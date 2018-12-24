@@ -16,6 +16,7 @@ public class ResultManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SoundManager.instance.PlaySingleSound(BGM);	
+		Debug.Log("Result Time" + TimeToResult.instance.GetComponent<TimeToResult>().GetRecordTime());
 	}
 	
 	// Update is called once per frame
@@ -25,10 +26,12 @@ public class ResultManager : MonoBehaviour {
 			ChangeScene();
 		}
 		
+
+
 	}
 
 	void ChangeScene(){
 		SoundManager.instance.PlaySoundSE(SE);
-		SceneManager.LoadScene("TITLE");
+		SceneManager.LoadScene("GAME");
 	}
 }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	//public Vector3 PlayerPosition; 
 	public GameObject Player;
 
+	[SerializeField]
 	public GameObject FadeUnit;
 
 
@@ -38,9 +39,17 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	public Vector3 CameraOffset;
 	
+	[SerializeField]
+	public float ClearHeight;
+
+	public float SceneChangeTime;
 	//カメラ類
 	[SerializeField]
 	float maxPlayerPosY = 0;
+
+	[SerializeField]
+	//GameObject SceneUnit = null;
+
 	void Awake(){
 		if (instance == null) {
 			instance = this;
@@ -79,6 +88,10 @@ public class GameManager : MonoBehaviour {
 		MoveLavaPosition();
 		
 		MoveCamera();
+
+			if(Player.transform.position.y > ClearHeight){
+				GameClear();
+			}
 		}
 
 	}
@@ -89,6 +102,11 @@ public class GameManager : MonoBehaviour {
 		Camera = GameObject.Find("Main Camera");
 
 		CurrentFrame = 0;
+
+
+		FadeManager.FadeIn();
+		//SceneUnit = GameObject.Find("FadeUnit");
+		//SceneUnit.GetComponent<FadeSystem>().FadeIn();
 		//FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(1);
 		//LavaPositon = new Vector3(0,0,0);
 		//PlayerPosition = new Vector3(0,0,0);
@@ -171,6 +189,15 @@ public class GameManager : MonoBehaviour {
 	void GameStart(){
 		GameStartFrag = true;
 		//Player.GetComponent<Animator>().SetInteger("State", 4);
+	}
+
+	void GameClear(){
+		TimeToResult.instance.GetComponent<TimeToResult>().RecordTime(GetCurrentFrameTime());
+		
+		FadeManager.FadeOut();
+		Debug.Log("FadeFade");
+		
+		Invoke("SceneChange",SceneChangeTime);
 	}
 
 
