@@ -128,8 +128,14 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void MoveLavaPosition(){
+
+		if(Player.transform.position.y - Lava.transform.position.y > 25f){
+			Lava.transform.position = new Vector3(Lava.transform.position.x, Player.transform.position.y -  20f, Lava.transform.position.z); 
+		}else{
+			Lava.transform.position += LavaSpeed1;
+		}
 		//Lava.transform.position += new Vector3(0.0f,0.01f,0.0f);
-		Lava.transform.position += LavaSpeed1;
+		//Lava.transform.position += LavaSpeed1;
 	}
 
 	void MoveCamera(){
