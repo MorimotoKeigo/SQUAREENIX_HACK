@@ -62,11 +62,15 @@ public class PlayerController : MonoBehaviour {
 	public float perfectFrame = 0.25f;
 
 	private GameObject trailFX; 
+	private float prevTime;
+
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody>();
+
 	}
 	void Start () {
+		prevTime = GameManager.instance.GetCurrentFrameTime();
 	}
 	
 	// Update is called once per frame
@@ -232,24 +236,34 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other)
 	{
+		var nowTime = GameManager.instance.GetCurrentFrameTime();
 		// if(!playerHead.IsHitHead)
 		// {
-		if(other.gameObject.tag == "Damage" && !isDamage)
+		if(nowTime - prevTime < 0.1f)
+			return;
+		prevTime = GameManager.instance.GetCurrentFrameTime();
+		if(other.gameObject.tag == "Damage")
 		{
-			StartCoroutine(Blink());
+			if(!isDamage)
+				StartCoroutine(Blink());
+
+
 			justGauge -= decreaseGaugeDamage;
 			velocityX = 0;
 			velocityY = 0;
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
 					playerState = PLAYER_STATE.LEFT;
+					Debug.Log("Damage");
 					jumpCnt = 0;
 					Jump();
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
+					Debug.Log("Damage");
 					jumpCnt = 0;
 					Jump();
+
 					break;
 				case PLAYER_STATE.Air:
 					break;
@@ -268,6 +282,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			velocityY = -1;
 		}else{
+			
 			rigidBody.useGravity = true;
 			collisionFrame = GameManager.instance.GetCurrentFrameTime();
 			velocityX = 0;
@@ -275,12 +290,14 @@ public class PlayerController : MonoBehaviour {
 			switch(playerState){
 				case PLAYER_STATE.RIGHT:
 					playerState = PLAYER_STATE.LEFT;
+					Debug.Log("normal");
 					jumpCnt = 0;
 					playerAnim.SetInteger("State",3);
 
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
+					Debug.Log("normal");
 					jumpCnt = 0;
 					playerAnim.SetInteger("State",2);					
 					break;
@@ -291,30 +308,30 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void OnCollisionStay(Collision other) {
+	// private void OnCollisionStay(Collision other) {
 		
-		if(other.gameObject.tag == "Damage" && !isDamage)
-		{
-			StartCoroutine(Blink());
-			justGauge -= decreaseGaugeDamage;
-			velocityX = 0;
-			velocityY = 0;
-			switch(playerState){
-				case PLAYER_STATE.RIGHT:
-					playerState = PLAYER_STATE.LEFT;
-					jumpCnt = 0;
-					Jump();
-					break;
-				case PLAYER_STATE.LEFT:
-					playerState = PLAYER_STATE.RIGHT;
-					jumpCnt = 0;
-					Jump();
-					break;
-				case PLAYER_STATE.Air:
-					break;
-			}
-		}
-	}
+	// 	if(other.gameObject.tag == "Damage" && !isDamage)
+	// 	{
+	// 		StartCoroutine(Blink());
+	// 		justGauge -= decreaseGaugeDamage;
+	// 		velocityX = 0;
+	// 		velocityY = 0;
+	// 		switch(playerState){
+	// 			case PLAYER_STATE.RIGHT:
+	// 				playerState = PLAYER_STATE.LEFT;
+	// 				jumpCnt = 0;
+	// 				Jump();
+	// 				break;
+	// 			case PLAYER_STATE.LEFT:
+	// 				playerState = PLAYER_STATE.RIGHT;
+	// 				jumpCnt = 0;
+	// 				Jump();
+	// 				break;
+	// 			case PLAYER_STATE.Air:
+	// 				break;
+	// 		}
+	// 	}
+	// }
 	private void OnCollisionExit(Collision other) {
 		rigidBody.useGravity = false;
 	}
