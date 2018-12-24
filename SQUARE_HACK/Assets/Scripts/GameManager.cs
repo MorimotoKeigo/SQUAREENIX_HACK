@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour {
 
 	bool SECountFrag = false;
 
+	bool GameStartFrag = false;
+
 	// Use this for initialization
 	void Start () {
 		SoundManager.instance.PlaySingleSound(BGM);
@@ -62,6 +64,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(Input.GetKeyDown(KeyCode.Space)){
+			GameStart();
+		}
+
+		if(GameStartFrag == true){
 		CalcCurrentFrame();
 		
 		
@@ -69,6 +77,7 @@ public class GameManager : MonoBehaviour {
 		MoveLavaPosition();
 		
 		MoveCamera();
+		}
 
 	}
 
@@ -155,8 +164,12 @@ public class GameManager : MonoBehaviour {
 			Camera.transform.position = Vector3.Lerp(Camera.transform.position, wantPos + CameraOffset, 5 * Time.deltaTime);
 		}
 		
-			
-
-
 	}
+
+	void GameStart(){
+		GameStartFrag = true;
+		Player.GetComponent<Animator>().SetInteger("State", 2);
+	}
+
+
 }
