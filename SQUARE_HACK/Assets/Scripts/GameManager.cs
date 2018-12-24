@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
 
 	bool GameStartFrag = false;
 
+	bool  Starting = false;
 	// Use this for initialization
 	void Start () {
 		SoundManager.instance.PlaySingleSound(BGM);
@@ -65,8 +66,9 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(Input.GetKeyDown(KeyCode.Space) && Starting == false){
 			GameStart();
+			Starting = true;
 		}
 
 		if(GameStartFrag == true){
@@ -168,7 +170,7 @@ public class GameManager : MonoBehaviour {
 
 	void GameStart(){
 		GameStartFrag = true;
-		Player.GetComponent<Animator>().SetInteger("State", 2);
+		Player.GetComponent<Animator>().SetInteger("State", 4);
 	}
 
 

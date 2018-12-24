@@ -67,7 +67,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.9847337
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -144,7 +144,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101520595902021698
@@ -166,7 +166,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -253,7 +253,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: LEFT_WALL
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -278,7 +278,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: JUMP(RIGHT)
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -303,7 +303,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: JUMP
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -328,7 +328,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DoubleJump
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -353,7 +353,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DoubleJump(RIGHT)
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -378,7 +378,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RIGHT_WALL
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -406,28 +406,28 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102093104719261176}
-    m_Position: {x: 240, y: 156, z: 0}
+    m_Position: {x: 528, y: 168, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102502810049438554}
     m_Position: {x: -24, y: 336, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102935087449170776}
-    m_Position: {x: 564, y: 336, z: 0}
+    m_Position: {x: 600, y: 324, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102682880593873880}
-    m_Position: {x: 72, y: 420, z: 0}
+    m_Position: {x: 24, y: 444, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102704698670750980}
-    m_Position: {x: 108, y: 564, z: 0}
+    m_Position: {x: 120, y: 564, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102222763300410008}
-    m_Position: {x: 240, y: 264, z: 0}
+    m_Position: {x: 240, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102519794539465336}
-    m_Position: {x: 480, y: 444, z: 0}
+    m_Position: {x: 516, y: 444, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102746233392519210}
-    m_Position: {x: 336, y: 564, z: 0}
+    m_Position: {x: 348, y: 564, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101161020555605372}
@@ -439,7 +439,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 300, y: 336, z: 0}
+  m_AnyStatePosition: {x: 264, y: 336, z: 0}
   m_EntryPosition: {x: 252, y: 96, z: 0}
   m_ExitPosition: {x: 516, y: 24, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

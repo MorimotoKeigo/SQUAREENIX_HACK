@@ -207,6 +207,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 1653161054761990, guid: 06e9bd9e70c494769b9b4709cf54bf01, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06e9bd9e70c494769b9b4709cf54bf01, type: 2}
   m_IsPrefabParent: 0
@@ -872,6 +876,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1115992095791334, guid: 33decd849c7af4cc88e0e56707a997cb,
     type: 2}
   m_PrefabInternal: {fileID: 1811533151}
+--- !u!95 &829675216 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95128362595986968, guid: 33decd849c7af4cc88e0e56707a997cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1811533151}
 --- !u!114 &829675218 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114560089958772056, guid: 33decd849c7af4cc88e0e56707a997cb,
@@ -1384,6 +1393,26 @@ Prefab:
     - target: {fileID: 1115992095791334, guid: 33decd849c7af4cc88e0e56707a997cb, type: 2}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114560089958772056, guid: 33decd849c7af4cc88e0e56707a997cb,
+        type: 2}
+      propertyPath: playerAnim
+      value: 
+      objectReference: {fileID: 829675216}
+    - target: {fileID: 212041330256985818, guid: 33decd849c7af4cc88e0e56707a997cb,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 212041330256985818, guid: 33decd849c7af4cc88e0e56707a997cb,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 212041330256985818, guid: 33decd849c7af4cc88e0e56707a997cb,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33decd849c7af4cc88e0e56707a997cb, type: 2}

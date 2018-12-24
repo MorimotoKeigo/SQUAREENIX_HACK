@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour {
 					jumpCnt++;
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					FirstJumpFX();
-					// playerAnim.
+					playerAnim.SetInteger("State",4);
 
 					
 				}else if(jumpCnt == 1)
@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour {
 					// speed -= decreaseGaugeDouble;
 					justGauge -= decreaseGaugeDouble;
 					angle = secondAngle * Mathf.Deg2Rad;
+					playerAnim.SetInteger("State",5);
 					jumpCnt++;
 				}
 			break;
@@ -150,6 +151,7 @@ public class PlayerController : MonoBehaviour {
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					FirstJumpFX();
 					SetPlayerSpeed(1f,1f,firstAngle);
+					playerAnim.SetInteger("State",6);
 					jumpCnt++;
 				}else if(jumpCnt == 1)
 				{
@@ -159,6 +161,7 @@ public class PlayerController : MonoBehaviour {
 					// speed -= decreaseGaugeDouble;
 					justGauge -= decreaseGaugeDouble;
 					angle = secondAngle * Mathf.Deg2Rad;
+					playerAnim.SetInteger("State",7);
 					jumpCnt++;
 				}
 			break;
@@ -262,10 +265,13 @@ public class PlayerController : MonoBehaviour {
 				case PLAYER_STATE.RIGHT:
 					playerState = PLAYER_STATE.LEFT;
 					jumpCnt = 0;
+					playerAnim.SetInteger("State",3);
+
 					break;
 				case PLAYER_STATE.LEFT:
 					playerState = PLAYER_STATE.RIGHT;
 					jumpCnt = 0;
+					playerAnim.SetInteger("State",2);					
 					break;
 				case PLAYER_STATE.Air:
 					break;
