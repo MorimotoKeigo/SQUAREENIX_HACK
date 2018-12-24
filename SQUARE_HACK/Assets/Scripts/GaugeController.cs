@@ -21,6 +21,7 @@ public class GaugeController : MonoBehaviour {
 	public GameObject effect;
 	public GameObject effectOneTwo;
 	public GameObject effectTwoThree;
+	public GameObject effectMax;
 	void Awake(){
 	}
 	// Use this for initialization
@@ -60,6 +61,7 @@ public class GaugeController : MonoBehaviour {
 			Number.sprite = san;
 			effectTwoThree.SetActive(true);
 			effectOneTwo.SetActive(false);
+			effectMax.SetActive(false);
 
 
 		}
@@ -67,6 +69,9 @@ public class GaugeController : MonoBehaviour {
 		{
 			max.enabled = true;
 			Number.sprite = man;
+			effectMax.SetActive(true);
+			effectTwoThree.SetActive(false);
+
 
 		}
 

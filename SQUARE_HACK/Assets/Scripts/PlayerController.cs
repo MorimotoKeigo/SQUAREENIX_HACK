@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			Debug.Log("perfect");
 			SoundManager.instance.PlaySoundSE(parfectSE,10.0f);
+			ParticleManager.instance.PlayFX(transform.position,7);
 			justResult = JUST_RESULT.PERFECT;	
 			// speed += increaseGaugePerfect;		
 			justGauge += increaseGaugePerfect;
@@ -248,6 +249,7 @@ public class PlayerController : MonoBehaviour {
 			// speed += increaseGaugePerfect / 2;	
 			justGauge += increaseGaugePerfect / 2;		
 			Debug.Log("good");
+			ParticleManager.instance.PlayFX(transform.position,6);
 			SoundManager.instance.PlaySoundSE(goodSE,10.0f);
 		}
 	}
