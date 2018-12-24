@@ -11,8 +11,10 @@ public class SoundManager : MonoBehaviour {
 	//singleton
 	public static SoundManager instance = null;
 
+
 	// Use this for initialization
 	void Start () {
+
 
         if(SoundManager.instance == null){
             instance = this;
@@ -20,7 +22,7 @@ public class SoundManager : MonoBehaviour {
             Destroy(this);
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         efSource = GameObject.Find("SESource").GetComponent<AudioSource>();
         bgmSource = GameObject.Find("BGMSource").GetComponent<AudioSource>();

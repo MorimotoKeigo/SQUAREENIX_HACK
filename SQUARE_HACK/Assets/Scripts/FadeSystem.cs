@@ -47,15 +47,17 @@ public class FadeSystem : MonoBehaviour
 
     void Start ()
     {
-        if(SoundManager.instance == null){
+        if(SoundManager.instance == null ){
             instance = this;
         }else if(SoundManager.instance != this){
             Destroy(this);
         }
 
-        DontDestroyOnLoad(gameObject);
+        
+        //DontDestroyOnLoad(gameObject);
         
         StandingTypeChange ();  //演出の種類を切り替える関数の呼び出し
+        
         
     }
 
