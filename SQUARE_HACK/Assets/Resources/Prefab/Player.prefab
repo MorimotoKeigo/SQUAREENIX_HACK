@@ -338,7 +338,7 @@ TrailRenderer:
   m_Time: 0.15
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 2.5
+    widthMultiplier: 1.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -431,7 +431,7 @@ TrailRenderer:
   m_Time: 0.3
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.6
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -515,18 +515,24 @@ MonoBehaviour:
   playerState: 1
   angle: 20
   firstAngle: 30
-  secondAngle: 90
+  secondAngle: 85
   speed: 20
   secondSpeed: 0
   increaseGaugePerfect: 5
   decreaseGaugeBad: 5
   decreaseGaugeDamage: 10
-  decreaseGaugeDouble: 3
+  decreaseGaugeDouble: 10
   justResult: 0
   playerRender: {fileID: 212041330256985818}
+  jumpCnt: 0
   jumpSE: {fileID: 8300000, guid: c64e8c1b5cd714b8d8899158f3b274c4, type: 3}
+  playerAnim: {fileID: 0}
   isDamage: 0
+  isStopDamage: 0
   justGauge: 0
+  badFrame: 1
+  goodFrame: 0.5
+  perfectFrame: 0.25
 --- !u!114 &114754986064280012
 MonoBehaviour:
   m_ObjectHideFlags: 1

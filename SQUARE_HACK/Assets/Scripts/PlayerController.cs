@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody rigidBody;
 	private float collisionFrame = 0;
 	public AudioClip jumpSE;
+	public Animator playerAnim;
 	public bool isDamage;
 	public bool isStopDamage;
 	public float justGauge = 0;
@@ -129,6 +130,8 @@ public class PlayerController : MonoBehaviour {
 					jumpCnt++;
 					SoundManager.instance.PlaySoundSE(jumpSE,5.0f);
 					FirstJumpFX();
+					// playerAnim.
+
 					
 				}else if(jumpCnt == 1)
 				{
