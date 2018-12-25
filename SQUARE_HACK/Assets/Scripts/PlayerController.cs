@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 	public float badFrame = 1.0f;
 	public float goodFrame = 0.5f;
 	public float perfectFrame = 0.25f;
-
+	public List<GameObject> trails;
 	private GameObject trailFX; 
 	private float prevTime;
 	private float stayPrevTime;

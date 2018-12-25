@@ -44,8 +44,11 @@ public class GaugeController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(playerController.justGauge >= 0 && playerController.justGauge < 100)
-		{
+		{	
 			nowGauge = GAUGE_STATE.ZERO;
+			playerController.trails[0].SetActive(true);
+			playerController.trails[1].SetActive(false);
+			
 			one.value = playerController.justGauge;
 			two.value = 100;
 			playerController.speed = 20f;
@@ -54,9 +57,15 @@ public class GaugeController : MonoBehaviour {
 		}
 		else if(playerController.justGauge >= 100 && playerController.justGauge < 200)
 		{
-			if(nowGauge == GAUGE_STATE.ZERO)
-				audioSource.PlayOneShot(audioSource.clip,1f);
 
+			if(nowGauge == GAUGE_STATE.ZERO){
+				audioSource.PlayOneShot(audioSource.clip,1f);
+				
+
+			}
+			playerController.trails[0].SetActive(false);
+			playerController.trails[1].SetActive(true);
+			playerController.trails[2].SetActive(false);
 			nowGauge = GAUGE_STATE.ONE;
 			one.value = 100;
 			two.value = playerController.justGauge;
@@ -68,8 +77,13 @@ public class GaugeController : MonoBehaviour {
 		}
 		else if(playerController.justGauge >= 200 && playerController.justGauge < 300)
 		{
-			if(nowGauge == GAUGE_STATE.ONE)
+			if(nowGauge == GAUGE_STATE.ONE){
 				audioSource.PlayOneShot(audioSource.clip,1f);
+				
+			}
+			playerController.trails[1].SetActive(false);
+			playerController.trails[2].SetActive(true);
+			playerController.trails[3].SetActive(false);
 
 			nowGauge = GAUGE_STATE.TWO;
 			two.value = 200;
@@ -85,8 +99,14 @@ public class GaugeController : MonoBehaviour {
 		}
 		else if(playerController.justGauge >= 300)
 		{
-			if(nowGauge == GAUGE_STATE.TWO)
+			if(nowGauge == GAUGE_STATE.TWO){
 				audioSource.PlayOneShot(audioSource.clip,1f);
+				
+			}
+
+			playerController.trails[2].SetActive(false);
+			playerController.trails[3].SetActive(true);
+
 			nowGauge = GAUGE_STATE.Max;
 			
 			max.enabled = true;
