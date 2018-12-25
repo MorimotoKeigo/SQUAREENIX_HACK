@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 				JustResult();
 			Jump();
 		}
-		if(transform.position.y >= GameManager.instance.ClearHeight -50)
+		if(transform.position.y >= GameManager.instance.ClearHeight -20)
 		{
 			playerState = PLAYER_STATE.LAST_JUMP;
 		}
