@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
@@ -140,10 +141,22 @@ public class GameManager : MonoBehaviour {
 		//ParticleManager.instance.PlayFX_tap(new Vector3(0f,0f,0f));
 
 		//ParticleManager.instance.PlayFX(new Vector3(0f,0f,0f),2);
-		Invoke("SceneChange",1.0f);
+		//Invoke("SceneChange",1.0f);
+
+		GameObject.Find("GAMEOVERPanel").GetComponent<Image>().enabled = true;
+		GameObject.Find("GAMEOVER").GetComponent<Image>().enabled = true;
+
+		Invoke("SceneChange1",2f);
 	}
 
-	void SceneChange(){
+	void SceneChange1(){
+		
+		//FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(2);
+		SoundManager.instance.StopSingleSound();
+		SceneManager.LoadScene("GAME");
+	}
+
+	void SceneChange2(){
 		
 		//FadeUnit.GetComponent<FadeSystem>().ChangeStagingType(2);
 		SoundManager.instance.StopSingleSound();
@@ -218,7 +231,7 @@ public class GameManager : MonoBehaviour {
 		FadeManager.FadeOut();
 		//Debug.Log("FadeFade");
 		
-		Invoke("SceneChange",SceneChangeTime);
+		Invoke("SceneChange2",SceneChangeTime);
 	}
 
 	void CalcHeight(){
@@ -229,5 +242,6 @@ public class GameManager : MonoBehaviour {
 	public float GetHeight(){
 		return dist;
 	}
-
+	
+	
 }
