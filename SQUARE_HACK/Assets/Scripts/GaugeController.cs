@@ -23,7 +23,7 @@ public class GaugeController : MonoBehaviour {
 	public GameObject effectTwoThree;
 	public GameObject effectMax;
 	bool stageSE = false;
-	public AudioClip levelUpSE;
+	public AudioSource audioSource;
 	public enum GAUGE_STATE{
 		ZERO,
 		ONE,
@@ -34,6 +34,7 @@ public class GaugeController : MonoBehaviour {
 	public GAUGE_STATE nowGauge = GAUGE_STATE.ZERO;
 
 		void Awake(){
+			audioSource = GetComponent<AudioSource>();
 	}
 	// Use this for initialization
 	void Start () {
@@ -54,7 +55,7 @@ public class GaugeController : MonoBehaviour {
 		else if(playerController.justGauge >= 100 && playerController.justGauge < 200)
 		{
 			if(nowGauge == GAUGE_STATE.ZERO)
-				SoundManager.instance.PlaySoundSE(levelUpSE,1f);
+				audioSource.PlayOneShot(audioSource.clip,1f);
 
 			nowGauge = GAUGE_STATE.ONE;
 			one.value = 100;
@@ -68,7 +69,7 @@ public class GaugeController : MonoBehaviour {
 		else if(playerController.justGauge >= 200 && playerController.justGauge < 300)
 		{
 			if(nowGauge == GAUGE_STATE.ONE)
-				SoundManager.instance.PlaySoundSE(levelUpSE,1f);
+				audioSource.PlayOneShot(audioSource.clip,1f);
 
 			nowGauge = GAUGE_STATE.TWO;
 			two.value = 200;
@@ -85,7 +86,7 @@ public class GaugeController : MonoBehaviour {
 		else if(playerController.justGauge >= 300)
 		{
 			if(nowGauge == GAUGE_STATE.TWO)
-				SoundManager.instance.PlaySoundSE(levelUpSE,1f);
+				audioSource.PlayOneShot(audioSource.clip,1f);
 			nowGauge = GAUGE_STATE.Max;
 			
 			max.enabled = true;
