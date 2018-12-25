@@ -196,16 +196,16 @@ public class GameManager : MonoBehaviour {
 			Lava.transform.position = new Vector3(Lava.transform.position.x, Player.transform.position.y -  20f, Lava.transform.position.z); 
 		}else{
 
-			if(Player.transform.position.y <= 300){
+			if(Player.transform.position.y >= 300){
+			Lava.transform.position += LavaSpeed3;
+			}
+			
+			if( Player.transform.position.y < 300 && Player.transform.position.y > 150){
 			Lava.transform.position += LavaSpeed2;
 			}
 			
-			if(Player.transform.position.y <= 150){
+			if(Player.transform.position.y < 150){
 			Lava.transform.position += LavaSpeed1;
-			}
-			
-			if(Player.transform.position.y > 300){
-			Lava.transform.position += LavaSpeed3;
 			}
 		}
 
