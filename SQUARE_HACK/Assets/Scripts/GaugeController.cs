@@ -81,7 +81,7 @@ public class GaugeController : MonoBehaviour {
 			}
 			playerController.trails[1].SetActive(false);
 			playerController.trails[2].SetActive(true);
-			playerController.trails[3].SetActive(false);//null
+			//playerController.trails[3].SetActive(false);//null
 
 			nowGauge = GAUGE_STATE.TWO;
 			two.value = 200;
@@ -101,9 +101,9 @@ public class GaugeController : MonoBehaviour {
 				audioSource.PlayOneShot(audioSource.clip,1f);
 			}
 
-			playerController.trails[2].SetActive(false);
-			if(playerController.trails[3].activeSelf != false)
-				playerController.trails[3].SetActive(true);
+			//playerController.trails[2].SetActive(false);
+			//if(playerController.trails[3].activeSelf != false)
+			//	playerController.trails[3].SetActive(true);
 
 
 			playerController.speed = 15f * 1.7f;
