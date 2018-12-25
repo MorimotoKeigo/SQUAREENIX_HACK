@@ -51,7 +51,7 @@ public class GaugeController : MonoBehaviour {
 			
 			one.value = playerController.justGauge;
 			two.value = 100;
-			playerController.speed = 20f;
+			playerController.speed = 15f;
 			Number.sprite = zero;
 			effectOneTwo.SetActive(false);
 		}
@@ -70,7 +70,7 @@ public class GaugeController : MonoBehaviour {
 			one.value = 100;
 			two.value = playerController.justGauge;
 			three.value = 200;
-			playerController.speed = 20f * 1.5f;
+			playerController.speed = 15f * 1.3f;
 			Number.sprite = ichi;
 			effectOneTwo.SetActive(true);
 			effectTwoThree.SetActive(false);
@@ -88,7 +88,7 @@ public class GaugeController : MonoBehaviour {
 			nowGauge = GAUGE_STATE.TWO;
 			two.value = 200;
 			three.value = playerController.justGauge;
-			playerController.speed = 20f * 2.0f;
+			playerController.speed = 15f * 1.5f;
 			max.enabled = false;
 			Number.sprite = san;
 			effectTwoThree.SetActive(true);
@@ -106,6 +106,9 @@ public class GaugeController : MonoBehaviour {
 
 			playerController.trails[2].SetActive(false);
 			playerController.trails[3].SetActive(true);
+
+
+			playerController.speed = 15f * 1.7f;
 
 			nowGauge = GAUGE_STATE.Max;
 			
