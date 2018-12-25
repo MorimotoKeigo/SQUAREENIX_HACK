@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!GameManager.instance.AlivePlayer)
+			return;
 		if(justGauge < 0)
 			justGauge = 0;
 		else if(justGauge > 300)
