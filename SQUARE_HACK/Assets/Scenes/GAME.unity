@@ -1987,7 +1987,7 @@ MonoBehaviour:
   FadeUnit: {fileID: 1322175709}
   BGM: {fileID: 8300000, guid: f8a561312abdd42e5a8414a6b68bcee2, type: 3}
   LavaSE: {fileID: 8300000, guid: 96e1757b021b34e2792a655b716b8e51, type: 3}
-  LavaSpeed1: {x: 0, y: 0.05, z: 0}
+  LavaSpeed1: {x: 0, y: 0.17, z: 0}
   LavaSpeed2: {x: 0, y: 0, z: 0}
   LavaSpeed3: {x: 0, y: 0, z: 0}
   CameraOffset: {x: 0, y: 3.5, z: 0}
@@ -2208,6 +2208,41 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7a53d1b01c7ef4e6da45632e5deb7c5a, type: 2}
+    - target: {fileID: 23011844088054128, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
+    - target: {fileID: 23608606697559380, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
+    - target: {fileID: 23744237774524536, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
+    - target: {fileID: 23445036745256004, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
+    - target: {fileID: 23507811368401354, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
+    - target: {fileID: 23383660482070804, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
+    - target: {fileID: 23353995296452320, guid: 1677818fbce59457a843295a94b263a3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c022ef6227e13489a8bb833961bb1421, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1677818fbce59457a843295a94b263a3, type: 2}
   m_IsPrefabParent: 0
