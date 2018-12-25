@@ -2687,7 +2687,7 @@ MonoBehaviour:
   FadeUnit: {fileID: 1322175709}
   BGM: {fileID: 8300000, guid: f8a561312abdd42e5a8414a6b68bcee2, type: 3}
   LavaSE: {fileID: 8300000, guid: 96e1757b021b34e2792a655b716b8e51, type: 3}
-  LavaSpeed1: {x: 0, y: 0.105, z: 0}
+  LavaSpeed1: {x: 0, y: 0.11, z: 0}
   LavaSpeed2: {x: 0, y: 0, z: 0}
   LavaSpeed3: {x: 0, y: 0, z: 0}
   CameraOffset: {x: 0, y: 3.5, z: 0}

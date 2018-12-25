@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour {
 	public Vector3 CameraFirstPosition ;
 	public Vector3 CameraPlayPosotion;
 	
-	
+	public bool AlivePlayer;
 	void Awake(){
 		if (instance == null) {
 			instance = this;
@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour {
 		Camera.transform.position = CameraFirstPosition;
 
 		CalcHeight();
+		AlivePlayer = true;
 		//SoundManager.instance.PlaySingleSound(BGM);
 	}
 	
@@ -143,6 +144,8 @@ public class GameManager : MonoBehaviour {
 		//ParticleManager.instance.PlayFX(new Vector3(0f,0f,0f),2);
 		//Invoke("SceneChange",1.0f);
 
+		AlivePlayer = false;
+
 		GameObject.Find("GAMEOVERPanel").GetComponent<Image>().enabled = true;
 		GameObject.Find("GAMEOVER").GetComponent<Image>().enabled = true;
 
@@ -192,8 +195,20 @@ public class GameManager : MonoBehaviour {
 		if(Player.transform.position.y - Lava.transform.position.y > 25f){
 			Lava.transform.position = new Vector3(Lava.transform.position.x, Player.transform.position.y -  20f, Lava.transform.position.z); 
 		}else{
+
+			if(Player.transform.position.y <= 300){
+			Lava.transform.position += LavaSpeed2;
+			}
+			
+			if(Player.transform.position.y <= 150){
 			Lava.transform.position += LavaSpeed1;
+			}
+			
+			if(Player.transform.position.y > 300){
+			Lava.transform.position += LavaSpeed3;
+			}
 		}
+
 		//Lava.transform.position += new Vector3(0.0f,0.01f,0.0f);
 		//Lava.transform.position += LavaSpeed1;
 	}
